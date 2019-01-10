@@ -272,7 +272,7 @@ MonoBehaviour:
     type: 2}
   GoalText: {fileID: 114925426068104964}
   tileContainer: {fileID: 4496581029125236}
-  GridRules: {fileID: 11400000, guid: b14a4b3ceb939d94392e366bbd10d12d, type: 2}
+  GameRules: {fileID: 11400000, guid: 43185d07562b8bd4787a0d0dd0860f28, type: 2}
 --- !u!222 &222826139096766258
 CanvasRenderer:
   m_ObjectHideFlags: 1

@@ -5,33 +5,34 @@ using UnityEngine;
 public class TileGrid : MonoBehaviour {
     public Vector2Int dimensions;
 
-    [HideInInspector]
-    public float spacing = 0.8f;
+    [HideInInspector] public float spacing = 0.8f;
 
-    [SerializeField]
-    private Tile tilePrefab;
+    [SerializeField] private Tile tilePrefab;
 
-    [SerializeField]
-    private TextMeshProUGUI GoalText;
+    [SerializeField] private TextMeshProUGUI GoalText;
 
-    [SerializeField]
-    private Transform tileContainer;
+    [SerializeField] private Transform tileContainer;
 
     public Tile[,] tiles;
 
-    public GridRules GridRules;
+    public GameRules GameRules;
 
     void Start() {
         GenerateGrid();
 
         GenerateValues();
 
-        GoalText.text = GridRules.Answers[Random.Range(0, GridRules.Answers.Count - 1)].ToString();
+        GameRules.NextAnswerEvent.AddListener(UpdateGoal);
+        UpdateGoal();
+    }
+
+    public void UpdateGoal() {
+        GoalText.text = GameRules.CurrentAnswer.ToString();
     }
 
     public void GenerateValues() {
         foreach (var tile in tiles) {
-            tile.SetValue(GridRules.TileValues[Random.Range(0, GridRules.TileValues.Count)]);
+            tile.SetValue(GameRules.TileValues[Random.Range(0, GameRules.TileValues.Count)]);
         }
 
         EnsureSingleOperators();
@@ -50,7 +51,7 @@ public class TileGrid : MonoBehaviour {
                     continue;
                 }
 
-                tile.SetValue(Random.Range(0, 9).ToString());
+                tile.SetValue(Random.Range(1, 9).ToString());
             }
 
             if (tile.GetValue() == "-") {
@@ -59,16 +60,16 @@ public class TileGrid : MonoBehaviour {
                     continue;
                 }
 
-                tile.SetValue(Random.Range(0, 9).ToString());
+                tile.SetValue(Random.Range(1, 9).ToString());
             }
 
-            if (tile.GetValue() == "x") {
+            if (tile.GetValue() == "*") {
                 if (!hasMultiply) {
                     hasMultiply = true;
                     continue;
                 }
 
-                tile.SetValue(Random.Range(0, 9).ToString());
+                tile.SetValue(Random.Range(1, 9).ToString());
             }
 
             if (tile.GetValue() == "/") {
@@ -77,7 +78,7 @@ public class TileGrid : MonoBehaviour {
                     continue;
                 }
 
-                tile.SetValue(Random.Range(0, 9).ToString());
+                tile.SetValue(Random.Range(1, 9).ToString());
             }
         }
 
@@ -119,6 +120,7 @@ public class TileGrid : MonoBehaviour {
         for (int x = 0; x < dimensions.x; x++) {
             for (int y = 0; y < dimensions.y; y++) {
                 Tile tile = Instantiate(tilePrefab, tileContainer);
+                tile.GameRules = GameRules;
                 tiles[x, y] = tile;
 
                 tile.transform.localPosition = new Vector2(x * spacing, -y * spacing);

@@ -11,9 +11,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9bb10379e1f129c45b24f275396087d7, type: 3}
   m_Name: Hard
   m_EditorClassIdentifier: 
+  CurrentAnswer: 18
   Answers: 100000001500000012000000090000000a00000004000000
+  NextAnswerEvent:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
+      Culture=neutral, PublicKeyToken=null
   TileValues:
-  - 0
   - 1
   - 2
   - 3
@@ -23,7 +28,6 @@ MonoBehaviour:
   - 7
   - 8
   - 9
-  - 0
   - +
   - '-'
   - x
