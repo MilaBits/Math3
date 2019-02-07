@@ -22,7 +22,6 @@ public class GameInput : MonoBehaviour {
 
             // Get click position
             Vector3 clickPos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-            Vector2 clickPos2D = new Vector2(clickPos.x, clickPos.y);
 
             RaycastHit2D hit = Physics2D.Raycast(clickPos, Vector2.zero);
 
@@ -64,9 +63,16 @@ public class GameInput : MonoBehaviour {
 
             // Move last tile to front
             Vector3 loopPos = closestTile.transform.position;
-            hits[hits.Length - 1].transform.position += new Vector3(0, 0, -5);
-            hits[hits.Length - 1].transform.GetComponent<Tile>().Slide(loopPos,
+            Tile lastTile = hits[hits.Length - 1].transform.GetComponent<Tile>();
+            lastTile.transform.position += new Vector3(0, 0, -5);
+            lastTile.Slide(loopPos,
                 SlideDuration);
+
+            if (lastTile.ToBeChanged) {
+                lastTile.SetRandomValue();
+                lastTile.ToBeChanged = false;
+                Grid.MarkRandomToBeChanged();
+            }
 
             // Move rest of tiles one space
             for (int i = 0; i < hits.Length - 1; i++) {

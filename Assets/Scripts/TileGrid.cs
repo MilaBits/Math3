@@ -32,86 +32,25 @@ public class TileGrid : MonoBehaviour {
 
     public void GenerateValues() {
         foreach (var tile in tiles) {
-            tile.SetValue(GameRules.TileValues[Random.Range(0, GameRules.TileValues.Count)]);
+            tile.SetValue(GameRules.Values[Random.Range(0, GameRules.Values.Count)]);
         }
 
         EnsureSingleOperators();
+
+        for (int i = 0; i < GameRules.ChangingTileCount; i++) {
+            MarkRandomToBeChanged();
+        }
     }
 
     private void EnsureSingleOperators() {
-        bool hasPlus = false;
-        bool hasMinus = false;
-        bool hasMultiply = false;
-        bool hasDivide = false;
+        foreach (string gameRulesOperator in GameRules.Operators) {
+            Tile randomTile = tiles[Random.Range(0, dimensions.x), Random.Range(0, dimensions.y)];
 
-        foreach (Tile tile in tiles) {
-            if (tile.GetValue() == "+") {
-                if (!hasPlus) {
-                    hasPlus = true;
-                    continue;
-                }
-
-                tile.SetValue(Random.Range(1, 9).ToString());
+            while (randomTile.type == Tile.TileType.Operator) {
+                randomTile = tiles[Random.Range(0, dimensions.x), Random.Range(0, dimensions.y)];
             }
 
-            if (tile.GetValue() == "-") {
-                if (!hasMinus) {
-                    hasMinus = true;
-                    continue;
-                }
-
-                tile.SetValue(Random.Range(1, 9).ToString());
-            }
-
-            if (tile.GetValue() == "*") {
-                if (!hasMultiply) {
-                    hasMultiply = true;
-                    continue;
-                }
-
-                tile.SetValue(Random.Range(1, 9).ToString());
-            }
-
-            if (tile.GetValue() == "/") {
-                if (!hasDivide) {
-                    hasDivide = true;
-                    continue;
-                }
-
-                tile.SetValue(Random.Range(1, 9).ToString());
-            }
-        }
-
-        while (!hasPlus) {
-            Tile tile = tiles[Random.Range(0, dimensions.x), Random.Range(0, dimensions.y)];
-            if (tile.type == Tile.TileType.Number) {
-                tile.SetValue("+");
-                break;
-            }
-        }
-
-        while (!hasMinus) {
-            Tile tile = tiles[Random.Range(0, dimensions.x), Random.Range(0, dimensions.y)];
-            if (tile.type == Tile.TileType.Number) {
-                tile.SetValue("-");
-                break;
-            }
-        }
-
-        while (!hasMultiply) {
-            Tile tile = tiles[Random.Range(0, dimensions.x), Random.Range(0, dimensions.y)];
-            if (tile.type == Tile.TileType.Number) {
-                tile.SetValue("x");
-                break;
-            }
-        }
-
-        while (!hasDivide) {
-            Tile tile = tiles[Random.Range(0, dimensions.x), Random.Range(0, dimensions.y)];
-            if (tile.type == Tile.TileType.Number) {
-                tile.SetValue("/");
-                break;
-            }
+            randomTile.SetValue(gameRulesOperator);
         }
     }
 
@@ -126,5 +65,20 @@ public class TileGrid : MonoBehaviour {
                 tile.transform.localPosition = new Vector2(x * spacing, -y * spacing);
             }
         }
+    }
+
+    public void MarkRandomToBeChanged() {
+        Tile randomTile = tiles[Random.Range(0, dimensions.x), Random.Range(0, dimensions.y)];
+
+        while (randomTile.ToBeChanged) {
+            randomTile = tiles[Random.Range(0, dimensions.x), Random.Range(0, dimensions.y)];
+        }
+
+        if (randomTile.type == Tile.TileType.Number) {
+            randomTile.MarkToBeChanged();
+            return;
+        }
+
+        MarkRandomToBeChanged();
     }
 }

@@ -145,12 +145,16 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   textMesh: {fileID: 114941733525504164}
   type: 0
+  ToBeChanged: 0
   DefaultColor: {r: 1, g: 1, b: 1, a: 1}
   Operator1Color: {r: 0.36850303, g: 0.67858803, b: 0.8584906, a: 1}
   Operator2Color: {r: 0.8773585, g: 0.608205, b: 0.23589355, a: 1}
+  ComboColor: {r: 0.38010266, g: 0.7264151, b: 0.18845676, a: 1}
+  ToBeChangedColor: {r: 0.8679245, g: 0.22314829, b: 0.16785331, a: 1}
   TileMask:
     serializedVersion: 2
     m_Bits: 512
+  GameRules: {fileID: 0}
   value: 
 --- !u!114 &114289001248246900
 MonoBehaviour:

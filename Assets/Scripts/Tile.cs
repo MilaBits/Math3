@@ -6,18 +6,21 @@ using MathParserTK;
 using TMPro;
 using UnityEditor;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 public class Tile : MonoBehaviour {
     [SerializeField] private TextMeshProUGUI textMesh;
-
+    [SerializeField] private string value;
     public TileType type;
+    public LayerMask TileMask;
 
-    public Color DefaultColor;
+    [Space] public Color DefaultColor;
     public Color Operator1Color;
     public Color Operator2Color;
-    private SpriteRenderer renderer;
-
-    public LayerMask TileMask;
+    public Color ComboColor;
+    public Color ToBeChangedColor;
+    public bool ToBeChanged;
+    [Space] private SpriteRenderer renderer;
 
     [HideInInspector] public GameRules GameRules;
 
@@ -26,7 +29,12 @@ public class Tile : MonoBehaviour {
     private const string Multiply = "x";
     private const string Divide = "/";
 
-    [SerializeField] private string value;
+
+    private Color baseColor;
+
+    public void SetRandomValue() {
+        SetValue(GameRules.Values[Random.Range(0, GameRules.Values.Count - 1)]);
+    }
 
     public void SetValue(string text) {
         value = text;
@@ -37,16 +45,16 @@ public class Tile : MonoBehaviour {
             case Plus:
             case Minus:
                 type = TileType.Operator;
-                renderer.color = Operator1Color;
+                renderer.color = baseColor = Operator1Color;
                 break;
             case Multiply:
             case Divide:
                 type = TileType.Operator;
-                renderer.color = Operator2Color;
+                renderer.color = baseColor = Operator2Color;
                 break;
             default:
                 type = TileType.Number;
-                renderer.color = DefaultColor;
+                renderer.color = baseColor = DefaultColor;
                 break;
         }
     }
@@ -73,8 +81,21 @@ public class Tile : MonoBehaviour {
             yield return new WaitForEndOfFrame();
         }
 
-        // check for answer
+        transform.position = target;
+
         CheckAnswer();
+    }
+
+    private IEnumerator ColorFade(Color start, Color end, float time) {
+        float elapsedTime = 0;
+
+        if (ToBeChanged) end = ToBeChangedColor;    
+
+        while (elapsedTime < time) {
+            renderer.color = Color.Lerp(start, end, (elapsedTime / time));
+            elapsedTime += Time.deltaTime;
+            yield return new WaitForEndOfFrame();
+        }
     }
 
     private void CheckAnswer() {
@@ -128,21 +149,39 @@ public class Tile : MonoBehaviour {
             if (chain.isValid() && chain.GetValue().Equals(GameRules.CurrentAnswer)) {
                 GameRules.NextAnswer();
 
-                Debug.Log("Correct Answer: " + chain + " = " + chain.GetValue());
+                foreach (Tile tile in chain.Tiles) {
+
+                    //TODO: Make green last a bit longer before switching.
+//                    StartCoroutine(Switch(tile, 1f));
+                    StartCoroutine(tile.ColorFade(tile.ComboColor, tile.baseColor, 1));
+                    if (tile.type == TileType.Number) {
+                        tile.SetRandomValue();
+                    }
+                }
+
+//                Debug.Log("Correct Answer: " + chain + " = " + chain.GetValue());
 //                Debug.Log(chain);
 //                Debug.Log(chain + " = " + chain.GetValue());
             }
         }
     }
+    
+    private IEnumerator Switch(Tile tile, float time) {
+
+        renderer.color = ComboColor;
+        yield return new WaitForSeconds(time);
+        StartCoroutine(tile.ColorFade(tile.ComboColor, tile.baseColor, 1));
+    }
+    
 
     private class Chain {
-        private List<Tile> tiles;
+        public List<Tile> Tiles { get; }
         private string mathString;
 
         private MathParser mathParser;
 
         public Chain(List<Tile> tiles) {
-            this.tiles = tiles;
+            this.Tiles = tiles;
 
             mathString = string.Empty;
             foreach (Tile tile in tiles) {
@@ -153,19 +192,19 @@ public class Tile : MonoBehaviour {
         }
 
         public bool isValid() {
-            if (tiles.Count == 3 &&
-                tiles[0].type == TileType.Number &&
-                tiles[1].type == TileType.Operator &&
-                tiles[2].type == TileType.Number) {
+            if (Tiles.Count == 3 &&
+                Tiles[0].type == TileType.Number &&
+                Tiles[1].type == TileType.Operator &&
+                Tiles[2].type == TileType.Number) {
                 return true;
             }
 
-            if (tiles.Count == 5 &&
-                tiles[0].type == TileType.Number &&
-                tiles[1].type == TileType.Operator &&
-                tiles[2].type == TileType.Number &&
-                tiles[3].type == TileType.Operator &&
-                tiles[4].type == TileType.Number) {
+            if (Tiles.Count == 5 &&
+                Tiles[0].type == TileType.Number &&
+                Tiles[1].type == TileType.Operator &&
+                Tiles[2].type == TileType.Number &&
+                Tiles[3].type == TileType.Operator &&
+                Tiles[4].type == TileType.Number) {
                 return true;
             }
 
@@ -185,5 +224,12 @@ public class Tile : MonoBehaviour {
         Number,
         Operator,
         None
+    }
+
+    public void MarkToBeChanged() {
+        Debug.Log(name + ": marked to be changed");
+        ToBeChanged = true;
+
+        StartCoroutine(ColorFade(baseColor, ToBeChangedColor, 1));
     }
 }

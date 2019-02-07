@@ -5,6 +5,7 @@ using UnityEngine.Events;
 
 [CreateAssetMenu]
 public class GameRules : ScriptableObject {
+    public int ChangingTileCount = 2;
     public int CurrentAnswer;
 
     public List<int> Answers;
@@ -24,5 +25,6 @@ public class GameRules : ScriptableObject {
         NextAnswer();
     }
 
-    public List<string> TileValues;
+    public List<string> Values;
+    public List<string> Operators;
 }
