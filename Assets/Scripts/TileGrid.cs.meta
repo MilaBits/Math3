@@ -5,9 +5,9 @@ MonoImporter:
   serializedVersion: 2
   defaultReferences:
   - tilePrefab: {fileID: 114171866383003328, guid: 7c0f59dfc90ba3c48b88ee330fbd3caa,
-      type: 2}
+      type: 3}
   - tileContainer: {instanceID: 0}
-  executionOrder: 0
+  executionOrder: 200
   icon: {instanceID: 0}
   userData: 
   assetBundleName: 

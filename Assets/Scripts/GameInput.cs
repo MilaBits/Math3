@@ -1,9 +1,7 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using System.Linq;
-using UnityEngine;
+﻿using UnityEngine;
 
-public class GameInput : MonoBehaviour {
+public class GameInput : MonoBehaviour
+{
     public TileGrid Grid;
 
     public LayerMask TileMask;
@@ -14,31 +12,54 @@ public class GameInput : MonoBehaviour {
     private bool lockedInput;
     private float elapsedTime;
 
-    void Update() {
-        if (Input.GetMouseButtonDown(0) && !lockedInput) {
+    void Update()
+    {
+        HandleClick(false);
+    }
+
+    public void HandleClick(bool programmatically)
+    {
+        if (Input.GetMouseButtonDown(0) && !lockedInput || programmatically && !lockedInput)
+        {
             // Lock input untill animations done
             lockedInput = true;
             elapsedTime = 0;
 
             // Get click position
-            Vector3 clickPos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+            Vector3 clickPos;
+            if (programmatically)
+            {
+                clickPos = Camera.main.ViewportToWorldPoint(new Vector2(Random.value, Random.value));
+                
+//                clickPos = new Vector3(
+//                    Random.Range(Camera.main.ScreenToWorldPoint(new Vector2(0, 0)).x, Camera.main.ScreenToWorldPoint(new Vector2(0, Screen.height)).x), 
+//                    Random.Range(Camera.main.ScreenToWorldPoint(new Vector2(0, 0)).y, Camera.main.ScreenToWorldPoint(new Vector2(0, Screen.height)).y), 0);
+            }
+            else
+            {
+                clickPos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+            }
 
             RaycastHit2D hit = Physics2D.Raycast(clickPos, Vector2.zero);
 
             // Make sure player taps outside the grid
-            if (hit.collider != null && BackgroundMask == (BackgroundMask | (1 << hit.transform.gameObject.layer))) {
+            if (hit.collider != null && BackgroundMask == (BackgroundMask | (1 << hit.transform.gameObject.layer)))
+            {
                 clickPos = hit.point;
             }
-            else {
+            else
+            {
                 return;
             }
 
             // Get closest tile to click
             float closestDistance = 100f;
             Tile closestTile = Grid.tiles[0, 0];
-            foreach (Tile tile in Grid.tiles) {
+            foreach (Tile tile in Grid.tiles)
+            {
                 float distance = Vector2.Distance(tile.transform.position, clickPos);
-                if (distance < closestDistance) {
+                if (distance < closestDistance)
+                {
                     closestDistance = distance;
                     closestTile = tile;
                 }
@@ -50,10 +71,12 @@ public class GameInput : MonoBehaviour {
 
             // Grab tiles to slide
             float raycastDistance = 0f;
-            if (slideDirection == Vector3.up || slideDirection == Vector3.down) {
+            if (slideDirection == Vector3.up || slideDirection == Vector3.down)
+            {
                 raycastDistance = Grid.dimensions.y * Grid.spacing;
             }
-            else {
+            else
+            {
                 raycastDistance = Grid.dimensions.x * Grid.spacing;
             }
 
@@ -68,14 +91,16 @@ public class GameInput : MonoBehaviour {
             lastTile.Slide(loopPos,
                 SlideDuration);
 
-            if (lastTile.ToBeChanged) {
+            if (lastTile.ToBeChanged)
+            {
                 lastTile.SetRandomValue();
                 lastTile.ToBeChanged = false;
                 Grid.MarkRandomToBeChanged();
             }
 
             // Move rest of tiles one space
-            for (int i = 0; i < hits.Length - 1; i++) {
+            for (int i = 0; i < hits.Length - 1; i++)
+            {
                 Tile tile = hits[i].transform.GetComponent<Tile>();
                 tile.Slide(tile.transform.position + slideDirection * Grid.spacing, SlideDuration);
             }
@@ -85,9 +110,9 @@ public class GameInput : MonoBehaviour {
         elapsedTime += Time.deltaTime;
 
         // Unlock input when the sliding finishes
-        if (lockedInput && elapsedTime > SlideDuration) {
+        if (lockedInput && elapsedTime > SlideDuration)
+        {
             lockedInput = false;
-            Debug.Log("unlocked");
         }
     }
 
@@ -96,28 +121,29 @@ public class GameInput : MonoBehaviour {
     /// </summary>
     /// <param name="directionCalcVector">Any direction</param>
     /// <returns>Direction the tiles should slide in</returns>
-    private Vector2 CalculateSlideDirection(Vector3 directionCalcVector) {
+    private Vector2 CalculateSlideDirection(Vector3 directionCalcVector)
+    {
         if (directionCalcVector.x > -0.4 && directionCalcVector.x < 0.4 &&
-            directionCalcVector.y < 0.0) {
-            Debug.Log("up");
+            directionCalcVector.y < 0.0)
+        {
             return Vector2.down;
         }
 
         if (directionCalcVector.x < 0.0 &&
-            directionCalcVector.y > -0.4 && directionCalcVector.y < 0.4) {
-            Debug.Log("right");
+            directionCalcVector.y > -0.4 && directionCalcVector.y < 0.4)
+        {
             return Vector2.left;
         }
 
         if (directionCalcVector.x > -0.4 && directionCalcVector.x < 0.4 &&
-            directionCalcVector.y > 0.0) {
-            Debug.Log("down");
+            directionCalcVector.y > 0.0)
+        {
             return Vector2.up;
         }
 
         if (directionCalcVector.x > 0.0 &&
-            directionCalcVector.y > -0.4 && directionCalcVector.y < 0.4) {
-            Debug.Log("left");
+            directionCalcVector.y > -0.4 && directionCalcVector.y < 0.4)
+        {
             return Vector2.right;
         }
 
