@@ -4,16 +4,21 @@
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 9bb10379e1f129c45b24f275396087d7, type: 3}
   m_Name: Hard
   m_EditorClassIdentifier: 
+  GameTime: 120000
+  ScoreBonusTime: 6000
   ChangingTileCount: 1
-  CurrentAnswer: 21
+  CurrentAnswer: 27
+  answerType: 0
   Answers: 100000001500000012000000090000000a00000004000000
+  randomRange: {x: 0, y: 100}
   NextAnswerEvent:
     m_PersistentCalls:
       m_Calls: []

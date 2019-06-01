@@ -10,8 +10,8 @@ public class GameInput : MonoBehaviour
     public float SlideDuration = 0.5f;
 
     private bool lockedInput;
-    private float elapsedTime;
-
+	private float elapsedTime;
+   
     void Update()
     {
         HandleClick(false);
@@ -30,10 +30,6 @@ public class GameInput : MonoBehaviour
             if (programmatically)
             {
                 clickPos = Camera.main.ViewportToWorldPoint(new Vector2(Random.value, Random.value));
-                
-//                clickPos = new Vector3(
-//                    Random.Range(Camera.main.ScreenToWorldPoint(new Vector2(0, 0)).x, Camera.main.ScreenToWorldPoint(new Vector2(0, Screen.height)).x), 
-//                    Random.Range(Camera.main.ScreenToWorldPoint(new Vector2(0, 0)).y, Camera.main.ScreenToWorldPoint(new Vector2(0, Screen.height)).y), 0);
             }
             else
             {

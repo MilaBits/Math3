@@ -4,9 +4,13 @@ using UnityEngine;
 
 public class TileGrid : MonoBehaviour
 {
+    [InlineEditor]
+    public GameRules GameRules;
+    
     [SerializeField, AssetList(Path = "Resources/Themes"), InlineEditor(InlineEditorObjectFieldModes.CompletelyHidden)]
     private Theme theme;
 
+    [Space]
     public Vector2Int dimensions;
 
     [HideInInspector]
@@ -23,7 +27,6 @@ public class TileGrid : MonoBehaviour
 
     public Tile[,] tiles;
 
-    public GameRules GameRules;
 
     [SerializeField]
     private SpriteRenderer background;

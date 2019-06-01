@@ -221,8 +221,8 @@ public class Tile : MonoBehaviour
         {
             if (chain.isValid() && chain.GetValue().Equals(GameRules.CurrentAnswer))
             {
-                GameRules.NextAnswer();
 
+	            GameRules.NextAnswer();
                 foreach (Tile tile in chain.Tiles)
                 {
                     //TODO: Make green last a bit longer before switching.
@@ -249,7 +249,7 @@ public class Tile : MonoBehaviour
         yield return new WaitForSeconds(time);
         if (isNumber) tile.SetRandomValue();
 
-        StartCoroutine(tile.Resize(0, 1, time));
+	    StartCoroutine(tile.Resize(0, 1, time));
     }
 
 
