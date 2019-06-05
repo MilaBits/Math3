@@ -148,6 +148,7 @@
           </e>
           <e p="GameInput.cs" t="Include" />
           <e p="GameRules.cs" t="Include" />
+          <e p="MainMenu.cs" t="Include" />
           <e p="Theme.cs" t="Include" />
           <e p="Themer.cs" t="Include" />
           <e p="Tile.cs" t="Include" />

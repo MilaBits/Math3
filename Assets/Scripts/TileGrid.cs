@@ -56,6 +56,7 @@ public class TileGrid : MonoBehaviour
 
         GenerateValues();
 
+	    GameRules.Instantiate(this);
         GameRules.NextAnswerEvent.AddListener(UpdateGoal);
         UpdateGoal();
 

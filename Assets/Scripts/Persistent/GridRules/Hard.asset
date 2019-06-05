@@ -7,7 +7,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 0}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 9bb10379e1f129c45b24f275396087d7, type: 3}
   m_Name: Hard
@@ -15,10 +15,11 @@ MonoBehaviour:
   GameTime: 120000
   ScoreBonusTime: 6000
   ChangingTileCount: 1
-  CurrentAnswer: 27
+  CurrentAnswer: 9
   answerType: 0
   Answers: 100000001500000012000000090000000a00000004000000
-  randomRange: {x: 0, y: 100}
+  randomRange: {x: 0, y: 34}
+  frequencyRange: {x: 0, y: 0}
   NextAnswerEvent:
     m_PersistentCalls:
       m_Calls: []

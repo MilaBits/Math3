@@ -1,7 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Globalization;
 using System.Text;
+using UnityEngine;
+using Debug = UnityEngine.Debug;
 
 namespace MathParserTK
 {
@@ -211,6 +214,7 @@ namespace MathParserTK
             }
             catch (ArgumentException e)
             {
+                Debug.Log("invalid expression: " + expression);
                 throw e;
             }
             catch (Exception e)
