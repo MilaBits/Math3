@@ -10,8 +10,8 @@ public class GameInput : MonoBehaviour
     public float SlideDuration = 0.5f;
 
     private bool lockedInput;
-	private float elapsedTime;
-   
+    private float elapsedTime;
+
     void Update()
     {
         HandleClick(false);
@@ -43,10 +43,8 @@ public class GameInput : MonoBehaviour
             {
                 clickPos = hit.point;
             }
-            else
-            {
-                return;
-            }
+            else return;
+
 
             // Get closest tile to click
             float closestDistance = 100f;
@@ -89,9 +87,10 @@ public class GameInput : MonoBehaviour
 
             if (lastTile.ToBeChanged)
             {
+                Grid.changeCount--;
                 lastTile.SetRandomValue();
                 lastTile.ToBeChanged = false;
-                Grid.MarkRandomToBeChanged();
+                Grid.MarkRandomToBeChanged(false);
             }
 
             // Move rest of tiles one space

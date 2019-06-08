@@ -11,61 +11,54 @@ using Random = UnityEngine.Random;
 [CreateAssetMenu]
 public class GameRules : ScriptableObject
 {
-    [SuffixLabel("ms")]
+    [BoxGroup("Game Time"), SuffixLabel("ms"), LabelWidth(115)]
     public int GameTime;
 
-    [SuffixLabel("ms")]
+	[BoxGroup("Game Time"), SuffixLabel("ms"), LabelText("Score Bonus"), LabelWidth(115)]
     public int ScoreBonusTime;
 
+	[BoxGroup("Tiles")]
+    public List<string> TileValues;
+
+	[BoxGroup("Tiles"), LabelText("Switching Tiles"), LabelWidth(115)]
     public int ChangingTileCount = 2;
+
+	[HideInInspector]
     public int CurrentAnswer;
 
-    [BoxGroup("answertype", false)]
-    [EnumToggleButtons]
-    public AnswerType answerType;
+	[BoxGroup("$Combined"), EnumToggleButtons, LabelWidth(115)]
+    public AnswerFilter answerFilters;
 
-    [BoxGroup("answertype")]
-    [ShowIf("isSetValues")]
-    public List<int> Answers;
-
-    [BoxGroup("answertype")]
-    [ShowIf("isRandom")]
-    [MinMaxSlider(1, 100)]
-    public Vector2Int randomRange;
-    
-    [MinMaxSlider(1, 100)]
+	[BoxGroup("$Combined"), MinMaxSlider(1, 1000, ShowFields = true), LabelText("Answer Frequency"), LabelWidth(115)]
     public Vector2Int frequencyRange;
 
     [HideInInspector]
     public UnityEvent NextAnswerEvent;
 
-    public List<string> Values;
-    public List<string> Operators;
+	[EnumToggleButtons, LabelWidth(115), BoxGroup("Tiles")]
+    public Operator ActiveOperators;
 
     private TileGrid grid;
 
-    private MathParser parser;
+    private int calculationsDone = 0;
 
-    private bool isRandom()
-    {
-        return answerType == AnswerType.RandomRange;
-    }
+    public static string Plus = "\u002B";
+    public static string Minus = "-";
+    public static string Multiply = "\u00D7";
+    public static string Divide = "\u00F7";
 
-    private bool isSetValues()
-    {
-        return answerType == AnswerType.SetValues;
-    }
-
+	public string Combined { get { return "Answer: " + this.CurrentAnswer; } }
+	
     public void Instantiate(TileGrid grid)
     {
         this.grid = grid;
-        parser = new MathParser();
         Random.InitState((int) System.DateTime.Now.Ticks);
-        CurrentAnswer = Random.Range(randomRange.x, randomRange.y);
+        GenerateAnswer(0);
     }
 
-    private int[] GetPossibleAnswers()
+    private IEnumerable<KeyValuePair<int, int>> GetPossibleAnswers()
     {
+        calculationsDone = 0;
         List<int> inputs = new List<int>();
         Dictionary<int, int> answers = new Dictionary<int, int>();
         foreach (Tile gridTile in grid.tiles)
@@ -77,8 +70,7 @@ public class GameRules : ScriptableObject
                 inputs.Add(value);
             }
             catch (Exception e)
-            {
-            }
+            { }
         }
 
         for (int i = 0; i < inputs.Count - 1; i++)
@@ -86,28 +78,48 @@ public class GameRules : ScriptableObject
             List<int> filteredInputs = inputs;
             filteredInputs.RemoveAt(i);
 
-//            IEnumerable combinations2 = Combinations(inputs, 2);
-//            foreach (IEnumerable combination in combinations2)
-//            {
-//
-//                int[] comb = combination.Cast<int>().ToArray();
-//            }
-            
+            IEnumerable combinations2 = Combinations(inputs, 2);
+            foreach (IEnumerable combination in combinations2)
+            {
+                int[] comb = combination.Cast<int>().ToArray();
+                if ((ActiveOperators & Operator.Plus) != 0) AddPotentialAnswer(answers, comb[0] + comb[1]);
+                if ((ActiveOperators & Operator.Minus) != 0) AddPotentialAnswer(answers, comb[0] - comb[1]);
+                if ((ActiveOperators & Operator.Multiply) != 0) AddPotentialAnswer(answers, comb[0] * comb[1]);
+                if ((ActiveOperators & Operator.Divide) != 0) AddPotentialAnswer(answers, comb[0] / comb[1]);
+            }
+
             IEnumerable combinations3 = Combinations(inputs, 3);
             foreach (IEnumerable combination in combinations3)
             {
-
                 int[] comb = combination.Cast<int>().ToArray();
-                
-                AddPotentialAnswer(answers, (int) parser.Parse($"{comb[0]}+{comb[1]}"));
-                AddPotentialAnswer(answers, (int) parser.Parse($"{comb[0]}-{comb[1]}"));
-                AddPotentialAnswer(answers, (int) parser.Parse($"{comb[0]}*{comb[1]}"));
-                AddPotentialAnswer(answers, (int) parser.Parse($"{comb[0]}/{comb[1]}"));
-                
-                AddPotentialAnswer(answers, (int) parser.Parse($"{comb[0]}+{comb[1]}+{comb[2]}"));
-                AddPotentialAnswer(answers, (int) parser.Parse($"{comb[0]}+{comb[1]}-{comb[2]}"));
-                AddPotentialAnswer(answers, (int) parser.Parse($"{comb[0]}+{comb[1]}*{comb[2]}"));
-                AddPotentialAnswer(answers, (int) parser.Parse($"{comb[0]}+{comb[1]}/{comb[2]}"));
+
+                if ((ActiveOperators & Operator.Plus & Operator.Minus) != 0)
+                    AddPotentialAnswer(answers, comb[0] + comb[1] - comb[2]);
+                if ((ActiveOperators & Operator.Plus & Operator.Multiply) != 0)
+                    AddPotentialAnswer(answers, comb[0] + comb[1] * comb[2]);
+                if ((ActiveOperators & Operator.Plus & Operator.Divide) != 0)
+                    AddPotentialAnswer(answers, comb[0] + comb[1] / comb[2]);
+
+                if ((ActiveOperators & Operator.Minus & Operator.Plus) != 0)
+                    AddPotentialAnswer(answers, comb[0] - comb[1] + comb[2]);
+                if ((ActiveOperators & Operator.Minus & Operator.Multiply) != 0)
+                    AddPotentialAnswer(answers, comb[0] - comb[1] * comb[2]);
+                if ((ActiveOperators & Operator.Minus & Operator.Divide) != 0)
+                    AddPotentialAnswer(answers, comb[0] - comb[1] / comb[2]);
+
+                if ((ActiveOperators & Operator.Multiply & Operator.Plus) != 0)
+                    AddPotentialAnswer(answers, comb[0] * comb[1] + comb[2]);
+                if ((ActiveOperators & Operator.Multiply & Operator.Minus) != 0)
+                    AddPotentialAnswer(answers, comb[0] * comb[1] - comb[2]);
+                if ((ActiveOperators & Operator.Multiply & Operator.Divide) != 0)
+                    AddPotentialAnswer(answers, comb[0] * comb[1] / comb[2]);
+
+                if ((ActiveOperators & Operator.Divide & Operator.Plus) != 0)
+                    AddPotentialAnswer(answers, comb[0] / comb[1] + comb[2]);
+                if ((ActiveOperators & Operator.Divide & Operator.Minus) != 0)
+                    AddPotentialAnswer(answers, comb[0] / comb[1] - comb[2]);
+                if ((ActiveOperators & Operator.Divide & Operator.Multiply) != 0)
+                    AddPotentialAnswer(answers, comb[0] / comb[1] * comb[2]);
             }
         }
 
@@ -117,13 +129,20 @@ public class GameRules : ScriptableObject
             debug += $"potential answer: {keyValuePair.Key}, frequency: {keyValuePair.Value}\n";
         }
 
-        Debug.Log(debug);
+        Debug.Log("Calculations done:" + calculationsDone + "\n" + debug);
 
-        return inputs.ToArray();
+        return answers.Where(a => a.Value >= frequencyRange.x && a.Value <= frequencyRange.y);
     }
 
-    private static void AddPotentialAnswer(Dictionary<int, int> answers, int result)
+    private void AddPotentialAnswer(Dictionary<int, int> answers, int result)
     {
+        calculationsDone++;
+
+        if (answerFilters.HasFlag(AnswerFilter.NoPositive) && result > 0) return;
+        if (answerFilters.HasFlag(AnswerFilter.NoNegative) && result < 0) return;
+        if (answerFilters.HasFlag(AnswerFilter.NoEven) && result % 2 == 0) return;
+        if (answerFilters.HasFlag(AnswerFilter.NoOdd) && result % 2 != 0) return;
+
         if (answers.ContainsKey(result))
         {
             answers[result]++;
@@ -181,39 +200,38 @@ public class GameRules : ScriptableObject
     {
         int lastAnswer = CurrentAnswer;
 
-        GetPossibleAnswers();
-
-        switch (answerType)
-        {
-            case AnswerType.RandomRange:
-                do
-                {
-                    CurrentAnswer = Random.Range(randomRange.x, randomRange.y);
-                } while (lastAnswer == CurrentAnswer);
-
-                break;
-            case AnswerType.SetValues:
-                do
-                {
-                    CurrentAnswer = Answers[Random.Range(0, Answers.Count)];
-                } while (lastAnswer == CurrentAnswer);
-
-                break;
-            default:
-                throw new ArgumentOutOfRangeException();
-        }
+        GenerateAnswer(lastAnswer);
 
         NextAnswerEvent.Invoke();
     }
 
-    private void Awake()
+    private void GenerateAnswer(int lastAnswer)
     {
-        NextAnswer();
+        IEnumerable<KeyValuePair<int, int>> answers = GetPossibleAnswers();
+
+        do
+        {
+            CurrentAnswer = answers.ElementAt(Random.Range(0, answers.Count())).Key;
+        } while (lastAnswer == CurrentAnswer);
     }
 
-    public enum AnswerType
+    [Flags]
+    public enum AnswerFilter
     {
-        RandomRange,
-        SetValues
+        None = 0,
+        NoPositive = 1,
+        NoNegative = 2,
+        NoEven = 4,
+        NoOdd = 8
+    }
+
+    [Flags]
+    public enum Operator
+    {
+        None = 0,
+        Plus = 1,
+        Minus = 2,
+        Multiply = 4,
+        Divide = 8
     }
 }

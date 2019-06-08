@@ -27,18 +27,13 @@ public class Tile : MonoBehaviour
     [HideInInspector]
     public GameRules GameRules;
 
-    private const string Plus = "+";
-    private const string Minus = "-";
-    private const string Multiply = "x";
-    private const string Divide = "/";
-
     public Theme Theme;
 
     private Color baseColor;
 
     public void SetRandomValue()
     {
-        SetValue(GameRules.Values[Random.Range(0, GameRules.Values.Count - 1)]);
+        SetValue(GameRules.TileValues[Random.Range(0, GameRules.TileValues.Count - 1)]);
     }
 
     public void SetValue(string text)
@@ -47,22 +42,20 @@ public class Tile : MonoBehaviour
         textMesh.text = value;
 
         // Dirty way
-        switch (value)
+        if (value == GameRules.Plus || value == GameRules.Minus)
         {
-            case Plus:
-            case Minus:
-                type = TileType.Operator1;
-                renderer.color = baseColor = Theme.Operator1Color;
-                break;
-            case Multiply:
-            case Divide:
-                type = TileType.Operator2;
-                renderer.color = baseColor = Theme.Operator2Color;
-                break;
-            default:
-                type = TileType.Number;
-                renderer.color = baseColor = Theme.TileColor;
-                break;
+            type = TileType.Operator1;
+            renderer.color = baseColor = Theme.Operator1Color;
+        }
+        else if (value == GameRules.Multiply || value == GameRules.Divide)
+        {
+            type = TileType.Operator2;
+            renderer.color = baseColor = Theme.Operator2Color;
+        }
+        else
+        {
+            type = TileType.Number;
+            renderer.color = baseColor = Theme.TileColor;
         }
     }
 
@@ -107,7 +100,8 @@ public class Tile : MonoBehaviour
 
     public string GetValue()
     {
-        if (value == "x") return "*";
+        if (value == "\u00D7") return "*";
+        if (value == "\u00F7") return "/";
         return value;
     }
 

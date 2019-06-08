@@ -1,32 +1,161 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ContentModelStore">
-    <e p="C:\Users\Mila\.Rider2017.3\system\resharper-host\local\Transient\ReSharperHost\v11\SolutionCaches\_Math3.1890516489.00" t="ExcludeRecursive" />
+    <e p="C:\Users\Mila\.Rider2018.3\system\extResources" t="IncludeRecursive" />
+    <e p="C:\Users\Mila\.Rider2018.3\system\resharper-host\local\Transient\ReSharperHost\v183\SolutionCaches\_Math3.1890516489.00" t="ExcludeRecursive" />
     <e p="D:\Data\Projects\S4\Math3" t="IncludeRecursive">
-      <e p="Assembly-CSharp-Editor-firstpass.csproj" t="IncludeRecursive" />
       <e p="Assembly-CSharp-Editor.csproj" t="IncludeRecursive" />
       <e p="Assembly-CSharp-firstpass.csproj" t="IncludeRecursive" />
       <e p="Assembly-CSharp.csproj" t="IncludeRecursive" />
       <e p="Assets" t="Include">
-        <e p="Editor" t="Include">
-          <e p="GameRulesEditor.cs" t="Include" />
-          <e p="GridEditor.cs" t="Include" />
-        </e>
         <e p="Plugins" t="Include">
           <e p="Editor" t="Include">
-            <e p="JetBrains" t="Include">
-              <e p="Unity3DRider.cs" t="Include" />
+            <e p="ScriptInspector3" t="Include">
+              <e p="_readme.txt" t="Include" />
+              <e p="CodeSnippets" t="Include">
+                <e p="base.txt" t="Include" />
+                <e p="case.txt" t="Include" />
+                <e p="catch.txt" t="Include" />
+                <e p="class.txt" t="Include" />
+                <e p="do.txt" t="Include" />
+                <e p="else.txt" t="Include" />
+                <e p="enum.txt" t="Include" />
+                <e p="finally.txt" t="Include" />
+                <e p="for.txt" t="Include" />
+                <e p="foreach.txt" t="Include" />
+                <e p="GenerateOverrideMethod.cs" t="Include" />
+                <e p="GeneratePropertyForField.cs" t="Include" />
+                <e p="GenerateUnityMagicMethod.cs" t="Include" />
+                <e p="get.txt" t="Include" />
+                <e p="if.txt" t="Include" />
+                <e p="interface.txt" t="Include" />
+                <e p="log.txt" t="Include" />
+                <e p="namespace.txt" t="Include" />
+                <e p="nn.txt" t="Include" />
+                <e p="set.txt" t="Include" />
+                <e p="struct.txt" t="Include" />
+                <e p="switch.txt" t="Include" />
+                <e p="try.txt" t="Include" />
+                <e p="while.txt" t="Include" />
+              </e>
+              <e p="EditorResources" t="Include">
+                <e p="Fonts" t="Include">
+                  <e p="SourceCodePro-Legal.txt" t="Include" />
+                </e>
+              </e>
+              <e p="ScriptInspector.asmdef" t="Include" />
+              <e p="Scripts" t="Include">
+                <e p="AboutScriptInspector.cs" t="Include" />
+                <e p="BooParser.cs" t="Include" />
+                <e p="CodeSnippets.cs" t="Include" />
+                <e p="CsGrammar.cs" t="Include" />
+                <e p="CsParser.cs" t="Include" />
+                <e p="FGCodeWindow.cs" t="Include" />
+                <e p="FGConsole.cs" t="Include" />
+                <e p="FGDefaultAssetInspector.cs" t="Include" />
+                <e p="FGFindInFiles.cs" t="Include" />
+                <e p="FGGrammar.cs" t="Include" />
+                <e p="FGKeyboardHook.cs" t="Include" />
+                <e p="FGListPopup.cs" t="Include" />
+                <e p="FGParser.cs" t="Include" />
+                <e p="FGPopupWindow.cs" t="Include" />
+                <e p="FGTextBuffer.cs" t="Include" />
+                <e p="FGTextBufferManager.cs" t="Include" />
+                <e p="FGTextEditor.cs" t="Include" />
+                <e p="FGTextInspector.cs" t="Include" />
+                <e p="FGTooltip.cs" t="Include" />
+                <e p="FGTypeSystem.cs" t="Include" />
+                <e p="FindReplaceWindow.cs" t="Include" />
+                <e p="FindResultsWindow.cs" t="Include" />
+                <e p="GoToLineWindow.cs" t="Include" />
+                <e p="JsParser.cs" t="Include" />
+                <e p="ScriptInspector.cs" t="Include" />
+                <e p="ShaderInspector.cs" t="Include" />
+                <e p="ShaderParser.cs" t="Include" />
+                <e p="SISettings.cs" t="Include" />
+                <e p="TabSwitcher.cs" t="Include" />
+                <e p="TangoColors.cs" t="Include" />
+                <e p="UnitySymbols.cs" t="Include" />
+              </e>
+              <e p="SI Changes.txt" t="Include" />
+              <e p="Si3 Extensions" t="Include">
+                <e p="Si3 Immediate Window.cs" t="Include" />
+                <e p="Si3 Open Any File.cs" t="Include" />
+                <e p="Si3 Open File.cs" t="Include" />
+                <e p="Si3 Print TextAsset.cs" t="Include" />
+                <e p="Si3 UnityEventDrawer.cs" t="Include" />
+              </e>
+              <e p="Themes" t="Include">
+                <e p="Darcula.cs" t="Include" />
+                <e p="MDBrown.cs" t="Include" />
+                <e p="MDBrownDark.cs" t="Include" />
+                <e p="Monokai.cs" t="Include" />
+                <e p="SolarizedDark.cs" t="Include" />
+                <e p="SolarizedLight.cs" t="Include" />
+                <e p="SonOfObsidian.cs" t="Include" />
+                <e p="TangoDark_Oblivion.cs" t="Include" />
+                <e p="TangoLight.cs" t="Include" />
+                <e p="Theme.cs" t="Include" />
+                <e p="VisualStudio.cs" t="Include" />
+                <e p="VisualStudioDark.cs" t="Include" />
+                <e p="VSCodeMonokai.cs" t="Include" />
+                <e p="VSDarkWithResharper.cs" t="Include" />
+                <e p="VSDarkWithVAX.cs" t="Include" />
+                <e p="VSLightWithVAX.cs" t="Include" />
+                <e p="Xcode.cs" t="Include" />
+              </e>
             </e>
           </e>
           <e p="MathParser" t="Include">
             <e p="MathParser.cs" t="Include" />
           </e>
+          <e p="Sirenix" t="Include">
+            <e p="Assemblies" t="Include">
+              <e p="link.xml" t="Include" />
+              <e p="Sirenix.OdinInspector.Attributes.xml" t="Include" />
+              <e p="Sirenix.OdinInspector.Editor.xml" t="Include" />
+              <e p="Sirenix.Serialization.Config.xml" t="Include" />
+              <e p="Sirenix.Utilities.Editor.xml" t="Include" />
+              <e p="Sirenix.Utilities.xml" t="Include" />
+            </e>
+            <e p="Odin Inspector" t="Include">
+              <e p="Scripts" t="Include">
+                <e p="Editor" t="Include">
+                  <e p="AssemblyImportSettingsAutomation.cs" t="Include" />
+                  <e p="BuildAOTAutomation.cs" t="Include" />
+                  <e p="EnsureOdinInspectorDefine.cs" t="Include" />
+                  <e p="FixBrokenUnityObjectWrapperDrawer.cs" t="Include" />
+                  <e p="Sirenix.OdinInspector.CompatibilityLayer.Editor.asmdef" t="Include" />
+                  <e p="SyncListDrawer.cs" t="Include" />
+                  <e p="SyncVarAttributeDrawer.cs" t="Include" />
+                  <e p="Vector2IntMinMaxAttributeDrawer.cs" t="Include" />
+                  <e p="VectorIntDrawers.cs" t="Include" />
+                  <e p="VectorIntPropertyResolvers.cs" t="Include" />
+                </e>
+                <e p="SerializedNetworkBehaviour.cs" t="Include" />
+                <e p="Sirenix.OdinInspector.CompatibilityLayer.asmdef" t="Include" />
+                <e p="VectorIntFormatters.cs" t="Include" />
+              </e>
+            </e>
+          </e>
         </e>
         <e p="Scripts" t="Include">
+          <e p="Clicker.cs" t="Include" />
+          <e p="Editor" t="Include">
+            <e p="GameRulesEditor.cs" t="Include" />
+            <e p="GridEditor.cs" t="Include" />
+          </e>
           <e p="GameInput.cs" t="Include" />
           <e p="GameRules.cs" t="Include" />
+          <e p="MainMenu.cs" t="Include" />
+          <e p="Theme.cs" t="Include" />
+          <e p="Themer.cs" t="Include" />
           <e p="Tile.cs" t="Include" />
           <e p="TileGrid.cs" t="Include" />
+          <e p="Timer.cs" t="Include" />
+        </e>
+        <e p="Shaders" t="Include">
+          <e p="ReverseFont.shader" t="Include" />
         </e>
         <e p="TextMesh Pro" t="Include">
           <e p="Resources" t="Include">
@@ -58,6 +187,9 @@
       <e p="Math3.sln" t="IncludeFlat" />
       <e p="obj" t="ExcludeRecursive" />
       <e p="packages" t="ExcludeRecursive" />
+      <e p="ScriptInspector.csproj" t="IncludeRecursive" />
+      <e p="Sirenix.OdinInspector.CompatibilityLayer.csproj" t="IncludeRecursive" />
+      <e p="Sirenix.OdinInspector.CompatibilityLayer.Editor.csproj" t="IncludeRecursive" />
       <e p="Temp" t="ExcludeRecursive">
         <e p="bin" t="ExcludeRecursive" />
       </e>

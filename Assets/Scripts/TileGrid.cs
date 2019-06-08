@@ -1,34 +1,39 @@
-﻿using Sirenix.OdinInspector;
+﻿using System.Linq;
+using Sirenix.OdinInspector;
+using Sirenix.Utilities;
 using TMPro;
 using UnityEngine;
 
 public class TileGrid : MonoBehaviour
 {
-    [InlineEditor]
+    [BoxGroup("Grid Settings", false)]
+    public Vector2Int dimensions;
+
+    [InlineEditor, AssetList(Path = "Scripts/Persistent/GridRules")]
     public GameRules GameRules;
-    
+
     [SerializeField, AssetList(Path = "Resources/Themes"), InlineEditor(InlineEditorObjectFieldModes.CompletelyHidden)]
     private Theme theme;
-
-    [Space]
-    public Vector2Int dimensions;
 
     [HideInInspector]
     public float spacing = 0.8f;
 
-    [SerializeField]
+    [SerializeField, FoldoutGroup("References")]
     private Tile tilePrefab;
 
-    [SerializeField]
+    [SerializeField, FoldoutGroup("References")]
     private TextMeshProUGUI GoalText;
 
-    [SerializeField]
+    [SerializeField, FoldoutGroup("References")]
     private Transform tileContainer;
 
     public Tile[,] tiles;
 
+    [HideInInspector]
+    public int changeCount;
 
-    [SerializeField]
+
+    [SerializeField, FoldoutGroup("References")]
     private SpriteRenderer background;
 
     public void RandomTheme()
@@ -38,7 +43,6 @@ public class TileGrid : MonoBehaviour
         UpdateTheme();
     }
 
-    [Button, PropertyOrder(-1)]
     public void UpdateTheme()
     {
         foreach (Tile tile in tiles)
@@ -56,7 +60,7 @@ public class TileGrid : MonoBehaviour
 
         GenerateValues();
 
-	    GameRules.Instantiate(this);
+        GameRules.Instantiate(this);
         GameRules.NextAnswerEvent.AddListener(UpdateGoal);
         UpdateGoal();
 
@@ -73,30 +77,27 @@ public class TileGrid : MonoBehaviour
     {
         foreach (var tile in tiles)
         {
-            tile.SetValue(GameRules.Values[Random.Range(0, GameRules.Values.Count)]);
+            tile.SetValue(GameRules.TileValues[Random.Range(0, GameRules.TileValues.Count)]);
         }
 
         EnsureSingleOperators();
-
-        for (int i = 0; i < GameRules.ChangingTileCount; i++)
-        {
-            MarkRandomToBeChanged();
-        }
+        MarkRandomToBeChanged(true);
     }
 
     private void EnsureSingleOperators()
     {
-        foreach (string gameRulesOperator in GameRules.Operators)
-        {
-            Tile randomTile = tiles[Random.Range(0, dimensions.x), Random.Range(0, dimensions.y)];
+        if ((GameRules.ActiveOperators & GameRules.Operator.Plus) != 0) SetRandomTileOperator(GameRules.Plus);
+        if ((GameRules.ActiveOperators & GameRules.Operator.Minus) != 0) SetRandomTileOperator(GameRules.Minus);
+        if ((GameRules.ActiveOperators & GameRules.Operator.Multiply) != 0) SetRandomTileOperator(GameRules.Multiply);
+        if ((GameRules.ActiveOperators & GameRules.Operator.Divide) != 0) SetRandomTileOperator(GameRules.Divide);
+    }
 
-            while (randomTile.type == (Tile.TileType.Operator1 | Tile.TileType.Operator2))
-            {
-                randomTile = tiles[Random.Range(0, dimensions.x), Random.Range(0, dimensions.y)];
-            }
-
-            randomTile.SetValue(gameRulesOperator);
-        }
+    private void SetRandomTileOperator(string operatorText)
+    {
+        Tile randomTile;
+        do randomTile = tiles[Random.Range(0, dimensions.x), Random.Range(0, dimensions.y)];
+        while (randomTile.type != Tile.TileType.Number);
+        randomTile.SetValue(operatorText);
     }
 
     private void GenerateGrid()
@@ -116,20 +117,22 @@ public class TileGrid : MonoBehaviour
         }
     }
 
-    public void MarkRandomToBeChanged()
+    public void MarkRandomToBeChanged(bool init)
     {
-        Tile randomTile;
-        do
-        {
-            randomTile = tiles[Random.Range(0, dimensions.x), Random.Range(0, dimensions.y)];
-        } while (randomTile.ToBeChanged);
+        int count = 1;
 
-        if (randomTile.type == Tile.TileType.Number)
+        if (init) count = GameRules.ChangingTileCount;
+
+        for (int i = 0; i < count; i++)
         {
-            randomTile.MarkToBeChanged();
-            return;
+            if (changeCount >= GameRules.ChangingTileCount) return;
+            var filteredList = tiles.FilterCast<Tile>().Where(t => t.type == Tile.TileType.Number && !t.ToBeChanged);
+            filteredList.ElementAt(Random.Range(0, filteredList.Count())).MarkToBeChanged();
+            changeCount++;
+//            
+//            do randomTile = tiles[Random.Range(0, dimensions.x), Random.Range(0, dimensions.y)];
+//            while (randomTile.type != Tile.TileType.Number && randomTile.ToBeChanged);
+//            randomTile.MarkToBeChanged();
         }
-
-        MarkRandomToBeChanged();
     }
 }
