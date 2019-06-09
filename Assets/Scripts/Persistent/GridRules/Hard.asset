@@ -25,9 +25,9 @@ MonoBehaviour:
   - 8
   - 9
   ChangingTileCount: 1
-  CurrentAnswer: 13
-  answerFilters: 0
-  frequencyRange: {x: 1, y: 151}
+  CurrentAnswer: 10
+  answerFilters: 2
+  frequencyRange: {x: 50, y: 200}
   NextAnswerEvent:
     m_PersistentCalls:
       m_Calls: []

@@ -244,6 +244,7 @@ public class Tile : MonoBehaviour
         if (isNumber) tile.SetRandomValue();
 
 	    StartCoroutine(tile.Resize(0, 1, time));
+        CheckAnswer();
     }
 
 
