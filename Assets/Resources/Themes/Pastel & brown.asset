@@ -20,3 +20,9 @@ MonoBehaviour:
   SolutionColor: {r: 0.36796755, g: 0.754717, b: 0.17443931, a: 1}
   ChangeColor: {r: 0.89019614, g: 0.28235295, b: 0.15686275, a: 1}
   BackgroundColor: {r: 0.82745105, g: 0.77647066, b: 0.854902, a: 1}
+  GridColor: {r: 0.735849, g: 0.35056958, b: 0.35056958, a: 1}
+  Changed:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
+      Culture=neutral, PublicKeyToken=null

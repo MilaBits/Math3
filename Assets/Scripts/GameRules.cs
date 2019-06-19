@@ -14,28 +14,28 @@ public class GameRules : ScriptableObject
     [BoxGroup("Game Time"), SuffixLabel("ms"), LabelWidth(115)]
     public int GameTime;
 
-	[BoxGroup("Game Time"), SuffixLabel("ms"), LabelText("Score Bonus"), LabelWidth(115)]
+    [BoxGroup("Game Time"), SuffixLabel("ms"), LabelText("Score Bonus"), LabelWidth(115)]
     public int ScoreBonusTime;
 
-	[BoxGroup("Tiles")]
+    [BoxGroup("Tiles")]
     public List<string> TileValues;
 
-	[BoxGroup("Tiles"), LabelText("Switching Tiles"), LabelWidth(115)]
+    [BoxGroup("Tiles"), LabelText("Switching Tiles"), LabelWidth(115)]
     public int ChangingTileCount = 2;
 
-	[HideInInspector]
+    [HideInInspector]
     public int CurrentAnswer;
 
-	[BoxGroup("$Combined"), EnumToggleButtons, LabelWidth(115)]
+    [BoxGroup("$Combined"), EnumToggleButtons, LabelWidth(115)]
     public AnswerFilter answerFilters;
 
-	[BoxGroup("$Combined"), MinMaxSlider(1, 1000, ShowFields = true), LabelText("Answer Frequency"), LabelWidth(115)]
+    [BoxGroup("$Combined"), MinMaxSlider(1, 1000, ShowFields = true), LabelText("Answer Frequency"), LabelWidth(115)]
     public Vector2Int frequencyRange;
 
     [HideInInspector]
     public UnityEvent NextAnswerEvent;
 
-	[EnumToggleButtons, LabelWidth(115), BoxGroup("Tiles")]
+    [EnumToggleButtons, LabelWidth(115), BoxGroup("Tiles")]
     public Operator ActiveOperators;
 
     private TileGrid grid;
@@ -47,8 +47,11 @@ public class GameRules : ScriptableObject
     public static string Multiply = "\u00D7";
     public static string Divide = "\u00F7";
 
-	public string Combined { get { return "Answer: " + this.CurrentAnswer; } }
-	
+    public string Combined
+    {
+        get { return "Answer: " + this.CurrentAnswer; }
+    }
+
     public void Instantiate(TileGrid grid)
     {
         this.grid = grid;
@@ -70,7 +73,8 @@ public class GameRules : ScriptableObject
                 inputs.Add(value);
             }
             catch (Exception e)
-            { }
+            {
+            }
         }
 
         for (int i = 0; i < inputs.Count - 1; i++)
@@ -131,7 +135,13 @@ public class GameRules : ScriptableObject
 
         Debug.Log("Calculations done:" + calculationsDone + "\n" + debug);
 
-        return answers.Where(a => a.Value >= frequencyRange.x && a.Value <= frequencyRange.y);
+        var output = answers.Where(a => a.Value >= frequencyRange.x && a.Value <= frequencyRange.y);
+
+        if (output.Count() > 0) return output;
+
+        IEnumerable<KeyValuePair<int, int>> backupOutput = new List<KeyValuePair<int, int>>()
+            {answers.Where(x => x.Value >= (frequencyRange.y - frequencyRange.x) && x.Key != CurrentAnswer).OrderBy(x => x.Value).ElementAt(0)};
+        return backupOutput;
     }
 
     private void AddPotentialAnswer(Dictionary<int, int> answers, int result)

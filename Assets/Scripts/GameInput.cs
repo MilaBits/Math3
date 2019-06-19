@@ -1,4 +1,6 @@
-﻿using UnityEngine;
+﻿using Sirenix.OdinInspector;
+using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class GameInput : MonoBehaviour
 {
@@ -12,8 +14,28 @@ public class GameInput : MonoBehaviour
     private bool lockedInput;
     private float elapsedTime;
 
+    [SerializeField]
+    private Timer timer;
+    
+    [FoldoutGroup("Audio"), SerializeField]
+    private AudioSource audioSource;
+
+    [FoldoutGroup("Audio"), SerializeField]
+    private AudioClip tapSound;
+
+    [FoldoutGroup("Audio"), SerializeField]
+    private AudioClip slideSound;
+
+    [FoldoutGroup("Audio"), SerializeField]
+    private AudioClip swapSound;
+
     void Update()
     {
+        if (Input.GetKey(KeyCode.Escape))
+        {
+            SceneManager.LoadScene("MainMenu");
+        }
+
         HandleClick(false);
     }
 
@@ -21,6 +43,9 @@ public class GameInput : MonoBehaviour
     {
         if (Input.GetMouseButtonDown(0) && !lockedInput || programmatically && !lockedInput)
         {
+            audioSource.PlayOneShot(tapSound);
+            if (!timer.Running) timer.StartTimer();
+
             // Lock input untill animations done
             lockedInput = true;
             elapsedTime = 0;
@@ -63,6 +88,7 @@ public class GameInput : MonoBehaviour
             Vector3 directionCalcVector = closestTile.transform.position - clickPos;
             Vector3 slideDirection = CalculateSlideDirection(directionCalcVector);
 
+            if (slideDirection == Vector3.zero) return;
             // Grab tiles to slide
             float raycastDistance = 0f;
             if (slideDirection == Vector3.up || slideDirection == Vector3.down)
@@ -78,6 +104,8 @@ public class GameInput : MonoBehaviour
                 closestTile.transform.position + -slideDirection * raycastDistance, slideDirection, raycastDistance * 2,
                 TileMask);
 
+            //TODO: buggy corners? (might cause red dupe)
+            
             // Move last tile to front
             Vector3 loopPos = closestTile.transform.position;
             Tile lastTile = hits[hits.Length - 1].transform.GetComponent<Tile>();
@@ -85,12 +113,14 @@ public class GameInput : MonoBehaviour
             lastTile.Slide(loopPos,
                 SlideDuration);
 
+            audioSource.PlayOneShot(slideSound);
             if (lastTile.ToBeChanged)
             {
                 Grid.changeCount--;
                 lastTile.SetRandomValue();
                 lastTile.ToBeChanged = false;
                 Grid.MarkRandomToBeChanged(false);
+                audioSource.PlayOneShot(swapSound);
             }
 
             // Move rest of tiles one space

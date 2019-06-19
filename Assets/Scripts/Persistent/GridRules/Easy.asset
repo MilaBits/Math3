@@ -25,12 +25,12 @@ MonoBehaviour:
   - 8
   - 9
   ChangingTileCount: 2
-  CurrentAnswer: 64
-  answerFilters: 0
-  frequencyRange: {x: 0, y: 0}
+  CurrentAnswer: 54
+  answerFilters: 2
+  frequencyRange: {x: 1, y: 150}
   NextAnswerEvent:
     m_PersistentCalls:
       m_Calls: []
     m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
       Culture=neutral, PublicKeyToken=null
-  ActiveOperators: 3
+  ActiveOperators: 15

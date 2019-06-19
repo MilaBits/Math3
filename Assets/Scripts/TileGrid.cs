@@ -3,6 +3,7 @@ using Sirenix.OdinInspector;
 using Sirenix.Utilities;
 using TMPro;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class TileGrid : MonoBehaviour
 {
@@ -13,7 +14,7 @@ public class TileGrid : MonoBehaviour
     public GameRules GameRules;
 
     [SerializeField, AssetList(Path = "Resources/Themes"), InlineEditor(InlineEditorObjectFieldModes.CompletelyHidden)]
-    private Theme theme;
+    public static Theme theme;
 
     [HideInInspector]
     public float spacing = 0.8f;
@@ -25,13 +26,27 @@ public class TileGrid : MonoBehaviour
     private TextMeshProUGUI GoalText;
 
     [SerializeField, FoldoutGroup("References")]
+    private TextMeshProUGUI TimeText;
+
+    [SerializeField, FoldoutGroup("References")]
+    private SpriteRenderer arrows;
+
+    [SerializeField, FoldoutGroup("References")]
+    private SpriteRenderer gridlines;
+
+    [SerializeField, FoldoutGroup("References")]
     private Transform tileContainer;
+
+    [SerializeField, FoldoutGroup("References")]
+    private AudioSource audioSource;
 
     public Tile[,] tiles;
 
+    [SerializeField]
+    private AudioClip solvedSound;
+
     [HideInInspector]
     public int changeCount;
-
 
     [SerializeField, FoldoutGroup("References")]
     private SpriteRenderer background;
@@ -50,12 +65,19 @@ public class TileGrid : MonoBehaviour
             tile.UpdateTheme(theme);
         }
 
-        background.color = theme.BackgroundColor;
+        arrows.color = theme.GridColor;
+        gridlines.color = theme.GridColor;
+
+        TimeText.color = theme.TextColor;
         GoalText.color = theme.TextColor;
+
+        background.color = theme.BackgroundColor;
     }
 
     void Start()
     {
+        if (!theme) theme = Resources.LoadAll<Theme>("Themes").First(t => t.name.Contains("Default"));
+
         GenerateGrid();
 
         GenerateValues();
@@ -64,12 +86,18 @@ public class TileGrid : MonoBehaviour
         GameRules.NextAnswerEvent.AddListener(UpdateGoal);
         UpdateGoal();
 
-        background.color = theme.BackgroundColor;
+        arrows.color = theme.GridColor;
+        gridlines.color = theme.GridColor;
+
+        TimeText.color = theme.TextColor;
         GoalText.color = theme.TextColor;
+
+        background.color = theme.BackgroundColor;
     }
 
     public void UpdateGoal()
     {
+        audioSource.PlayOneShot(solvedSound);
         GoalText.text = GameRules.CurrentAnswer.ToString();
     }
 
@@ -109,7 +137,7 @@ public class TileGrid : MonoBehaviour
             {
                 Tile tile = Instantiate(tilePrefab, tileContainer);
                 tile.GameRules = GameRules;
-                tile.Theme = theme;
+//                tile.Theme = theme;
                 tiles[x, y] = tile;
 
                 tile.transform.localPosition = new Vector2(x * spacing, -y * spacing);

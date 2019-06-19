@@ -23,11 +23,11 @@ public class Tile : MonoBehaviour
 
     [Space]
     private SpriteRenderer renderer;
-
+    
     [HideInInspector]
     public GameRules GameRules;
 
-    public Theme Theme;
+//    public Theme Theme;
 
     private Color baseColor;
 
@@ -45,17 +45,17 @@ public class Tile : MonoBehaviour
         if (value == GameRules.Plus || value == GameRules.Minus)
         {
             type = TileType.Operator1;
-            renderer.color = baseColor = Theme.Operator1Color;
+            renderer.color = baseColor = TileGrid.theme.Operator1Color;
         }
         else if (value == GameRules.Multiply || value == GameRules.Divide)
         {
             type = TileType.Operator2;
-            renderer.color = baseColor = Theme.Operator2Color;
+            renderer.color = baseColor = TileGrid.theme.Operator2Color;
         }
         else
         {
             type = TileType.Number;
-            renderer.color = baseColor = Theme.TileColor;
+            renderer.color = baseColor = TileGrid.theme.TileColor;
         }
     }
 
@@ -66,12 +66,12 @@ public class Tile : MonoBehaviour
 
     private void Start()
     {
-        textMesh.color = Theme.TileTextColor;
+        textMesh.color = TileGrid.theme.TileTextColor;
     }
 
     public void UpdateTheme(Theme theme)
     {
-        Theme = theme;
+//        Theme = theme;
 //        renderer.color = baseColor = theme.TileColor;
         textMesh.color = theme.TileTextColor;
 
@@ -130,7 +130,7 @@ public class Tile : MonoBehaviour
     {
         float elapsedTime = 0;
 
-        if (ToBeChanged) end = Theme.ChangeColor;
+        if (ToBeChanged) end = TileGrid.theme.ChangeColor;
 
         while (elapsedTime < time)
         {
@@ -215,7 +215,6 @@ public class Tile : MonoBehaviour
         {
             if (chain.isValid() && chain.GetValue().Equals(GameRules.CurrentAnswer))
             {
-
 	            GameRules.NextAnswer();
                 foreach (Tile tile in chain.Tiles)
                 {
@@ -236,7 +235,7 @@ public class Tile : MonoBehaviour
     {
         bool isNumber = tile.type == TileType.Number;
 
-        StartCoroutine(tile.ColorFade(Theme.SolutionColor, tile.baseColor, 1));
+        StartCoroutine(tile.ColorFade(TileGrid.theme.SolutionColor, tile.baseColor, 1));
 
         StartCoroutine(tile.Resize(1, 0, time));
 
@@ -315,6 +314,6 @@ public class Tile : MonoBehaviour
     {
         ToBeChanged = true;
 
-        StartCoroutine(ColorFade(baseColor, Theme.ChangeColor, 1));
+        StartCoroutine(ColorFade(baseColor, TileGrid.theme.ChangeColor, 1));
     }
 }

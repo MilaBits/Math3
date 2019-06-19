@@ -1,0 +1,28 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 164a53666a800a446a5fcef32e161cdf, type: 3}
+  m_Name: Ocean
+  m_EditorClassIdentifier: 
+  TileColor: {r: 0.49247953, g: 0.8456508, b: 0.8773585, a: 1}
+  Operator1Color: {r: 0.23529409, g: 0.5830759, b: 0.8509804, a: 1}
+  Operator2Color: {r: 0.18244925, g: 0.37523592, b: 0.9433962, a: 1}
+  TextColor: {r: 0.16237986, g: 0.325079, b: 0.38679248, a: 1}
+  TileTextColor: {r: 0.15294118, g: 0.24313727, b: 0.2784314, a: 1}
+  SolutionColor: {r: 0, g: 1, b: 0.7945039, a: 1}
+  ChangeColor: {r: 0.31238878, g: 0.393538, b: 0.5660378, a: 1}
+  BackgroundColor: {r: 0.23255605, g: 0.6721435, b: 0.735849, a: 1}
+  GridColor: {r: 0.61957103, g: 0.8080845, b: 0.8584906, a: 1}
+  Changed:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
+      Culture=neutral, PublicKeyToken=null

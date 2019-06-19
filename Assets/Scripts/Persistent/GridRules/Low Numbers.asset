@@ -20,10 +20,14 @@ MonoBehaviour:
   - 3
   - 4
   - 5
-  ChangingTileCount: 2
+  - 6
+  - 7
+  - 8
+  - 9
+  ChangingTileCount: 1
   CurrentAnswer: 8
   answerFilters: 0
-  frequencyRange: {x: 1, y: 1000}
+  frequencyRange: {x: 1, y: 30}
   NextAnswerEvent:
     m_PersistentCalls:
       m_Calls: []
