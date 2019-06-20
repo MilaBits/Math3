@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Easy
   m_EditorClassIdentifier: 
   GameTime: 180000
-  ScoreBonusTime: 5000
+  ScoreBonusTime: 7000
   TileValues:
   - 1
   - 2
@@ -25,7 +25,7 @@ MonoBehaviour:
   - 8
   - 9
   ChangingTileCount: 2
-  CurrentAnswer: 54
+  CurrentAnswer: 42
   answerFilters: 2
   frequencyRange: {x: 1, y: 150}
   NextAnswerEvent:
