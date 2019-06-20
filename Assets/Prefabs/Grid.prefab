@@ -249,6 +249,7 @@ MonoBehaviour:
   gridlines: {fileID: 1010455549}
   tileContainer: {fileID: 4496581029125236}
   audioSource: {fileID: 0}
+  popup: {fileID: 588998888173515574, guid: 25719d5bca4ce9d4abcbfe6e1a681bd5, type: 3}
   solvedSound: {fileID: 8300000, guid: 93fd068999df8664398ead2e641a3902, type: 3}
   changeCount: 0
   background: {fileID: 0}

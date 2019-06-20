@@ -4,9 +4,18 @@ MonoImporter:
   externalObjects: {}
   serializedVersion: 2
   defaultReferences:
+  - GameRules: {instanceID: 0}
   - tilePrefab: {fileID: 114171866383003328, guid: 7c0f59dfc90ba3c48b88ee330fbd3caa,
       type: 3}
+  - GoalText: {instanceID: 0}
+  - TimeText: {instanceID: 0}
+  - arrows: {instanceID: 0}
+  - gridlines: {instanceID: 0}
   - tileContainer: {instanceID: 0}
+  - audioSource: {instanceID: 0}
+  - popup: {fileID: 588998888173515574, guid: 25719d5bca4ce9d4abcbfe6e1a681bd5, type: 3}
+  - solvedSound: {instanceID: 0}
+  - background: {instanceID: 0}
   executionOrder: 200
   icon: {instanceID: 0}
   userData: 

@@ -38,7 +38,10 @@ public class TileGrid : MonoBehaviour
     private Transform tileContainer;
 
     [SerializeField, FoldoutGroup("References")]
-    private AudioSource audioSource;
+	private AudioSource audioSource;
+	
+	[SerializeField]
+	private ScorePopup popup;
 
     public Tile[,] tiles;
 
