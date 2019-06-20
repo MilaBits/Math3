@@ -61,6 +61,7 @@ public class Timer : MonoBehaviour
     {
         int minutes = (int) ((time / (1000 * 60)) % 60);
         int seconds = (int) (time / 1000) % 60;
-        timeText.text = string.Format("{0}:{1}", minutes, seconds);
+        string zero = seconds < 10 ? "0" : string.Empty;
+        timeText.text = string.Format("{0}:{1}{2}", minutes, seconds, zero);
     }
 }

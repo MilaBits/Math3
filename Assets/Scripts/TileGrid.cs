@@ -41,7 +41,7 @@ public class TileGrid : MonoBehaviour
 	private AudioSource audioSource;
 	
 	[SerializeField]
-	private ScorePopup popup;
+	private ScorePopup popupPrefab;
 
     public Tile[,] tiles;
 
@@ -53,6 +53,8 @@ public class TileGrid : MonoBehaviour
 
     [SerializeField, FoldoutGroup("References")]
     private SpriteRenderer background;
+
+    private Transform popupTarget;
 
     public void RandomTheme()
     {
@@ -101,6 +103,7 @@ public class TileGrid : MonoBehaviour
     public void UpdateGoal()
     {
         audioSource.PlayOneShot(solvedSound);
+        
         GoalText.text = GameRules.CurrentAnswer.ToString();
     }
 
@@ -140,6 +143,7 @@ public class TileGrid : MonoBehaviour
             {
                 Tile tile = Instantiate(tilePrefab, tileContainer);
                 tile.GameRules = GameRules;
+                tile.popupTarget = GoalText.transform.position;
 //                tile.Theme = theme;
                 tiles[x, y] = tile;
 

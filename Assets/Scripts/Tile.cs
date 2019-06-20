@@ -23,11 +23,16 @@ public class Tile : MonoBehaviour
 
     [Space]
     private SpriteRenderer renderer;
-    
+
     [HideInInspector]
     public GameRules GameRules;
 
 //    public Theme Theme;
+
+    [SerializeField]
+    private ScorePopup popupPrefab;
+
+    public Vector3 popupTarget;
 
     private Color baseColor;
 
@@ -215,20 +220,25 @@ public class Tile : MonoBehaviour
         {
             if (chain.isValid() && chain.GetValue().Equals(GameRules.CurrentAnswer))
             {
-	            GameRules.NextAnswer();
-                foreach (Tile tile in chain.Tiles)
+                for (int i = 0; i < chain.Tiles.Count; i++)
                 {
-                    //TODO: Make green last a bit longer before switching.
+                    if (tiles.Count == 5) SpawnPopup(chain, 2);
+                    else if (tiles.Count == 3) SpawnPopup(chain, 1);
 
+                    Tile tile = chain.Tiles[i];
                     StartCoroutine(Switch(tile, .5f));
-//                    StartCoroutine(tile.ColorFade(tile.ComboColor, tile.baseColor, 1));
                 }
 
-//                Debug.Log("Correct Answer: " + chain + " = " + chain.GetValue());
-//                Debug.Log(chain);
-//                Debug.Log(chain + " = " + chain.GetValue());
+                GameRules.NextAnswer();
             }
         }
+    }
+
+    private void SpawnPopup(Chain chain, int index)
+    {
+        Transform spawnPoint = chain.Tiles[index].transform;
+        ScorePopup popup = Instantiate(popupPrefab, spawnPoint);
+        popup.Initialize(GameRules.CurrentAnswer.ToString(), spawnPoint.position, popupTarget);
     }
 
     private IEnumerator Switch(Tile tile, float time)
@@ -242,7 +252,7 @@ public class Tile : MonoBehaviour
         yield return new WaitForSeconds(time);
         if (isNumber) tile.SetRandomValue();
 
-	    StartCoroutine(tile.Resize(0, 1, time));
+        StartCoroutine(tile.Resize(0, 1, time));
         CheckAnswer();
     }
 
