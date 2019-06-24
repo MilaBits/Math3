@@ -237,7 +237,8 @@ public class Tile : MonoBehaviour
     private void SpawnPopup(Chain chain, int index)
     {
         Transform spawnPoint = chain.Tiles[index].transform;
-        ScorePopup popup = Instantiate(popupPrefab, spawnPoint);
+        ScorePopup popup = Instantiate(popupPrefab);
+        popup.transform.position = spawnPoint.position;
         popup.Initialize(GameRules.CurrentAnswer.ToString(), spawnPoint.position, popupTarget);
     }
 

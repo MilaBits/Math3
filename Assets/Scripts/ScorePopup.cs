@@ -10,7 +10,8 @@ public class ScorePopup : MonoBehaviour
     private Vector3 start;
 
     private float passedTime;
-    private const float travelTime = .25f;
+    [SerializeField]
+    private float travelTime = .25f;
 
     public void Initialize(string text, Vector3 start, Vector3 target)
     {
@@ -21,7 +22,6 @@ public class ScorePopup : MonoBehaviour
 
     private void Update()
     {
-        Debug.Log("Boop");
         passedTime += Time.deltaTime;
         transform.position = Vector3.Lerp(start, target, passedTime / travelTime);
 

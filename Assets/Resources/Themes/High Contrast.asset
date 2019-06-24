@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 164a53666a800a446a5fcef32e161cdf, type: 3}
-  m_Name: High Contact
+  m_Name: High Contrast
   m_EditorClassIdentifier: 
   TileColor: {r: 1, g: 1, b: 1, a: 1}
   Operator1Color: {r: 0, g: 0.8598914, b: 1, a: 1}
