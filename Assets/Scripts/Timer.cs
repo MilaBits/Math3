@@ -1,7 +1,9 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
+using UnityEngine.Events;
 
 public class Timer : MonoBehaviour
 {
@@ -9,7 +11,13 @@ public class Timer : MonoBehaviour
     private TileGrid grid;
 
     [SerializeField]
-    private TextMeshProUGUI timeText;
+    private TextMeshPro timeText;
+
+    [SerializeField]
+    private TextMeshPro bonusTimeText;
+
+    [SerializeField]
+    private Animator bonusTimeAnimator;
 
     public bool GameOver { get; private set; }
 
@@ -17,11 +25,15 @@ public class Timer : MonoBehaviour
 
     float remainingTime;
 
+    public UnityEvent TimeOver;
+
+    private TimeSpan timeSpan;
+
     protected void Start()
     {
+        timeSpan = TimeSpan.FromMilliseconds(grid.GameRules.ScoreBonusTime);
         grid.GameRules.NextAnswerEvent.AddListener(AddBonusTime);
         SetTimeText(grid.GameRules.GameTime);
-        timeText.text += "0";
     }
 
     public void StartTimer()
@@ -38,7 +50,9 @@ public class Timer : MonoBehaviour
     public void AddBonusTime()
     {
         remainingTime += grid.GameRules.ScoreBonusTime;
-        Debug.Log("Time Added!");
+
+        bonusTimeText.text = $"+{timeSpan.Seconds.ToString()}";
+        bonusTimeAnimator.SetTrigger("Pop");
     }
 
     void Update()
@@ -51,17 +65,16 @@ public class Timer : MonoBehaviour
 
             if (remainingTime < 0)
             {
-                Debug.Log("Game over");
                 GameOver = true;
+                Running = false;
+                TimeOver.Invoke();
             }
         }
     }
 
     private void SetTimeText(float time)
     {
-        int minutes = (int) ((time / (1000 * 60)) % 60);
-        int seconds = (int) (time / 1000) % 60;
-        string zero = seconds < 10 ? "0" : string.Empty;
-        timeText.text = string.Format("{0}:{2}{1}", minutes, seconds, zero);
+        TimeSpan t = TimeSpan.FromMilliseconds(time);
+        timeText.text = new DateTime(t.Ticks).ToString("m:ss");
     }
 }

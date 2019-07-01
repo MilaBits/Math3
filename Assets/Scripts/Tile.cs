@@ -21,7 +21,9 @@ public class Tile : MonoBehaviour
 
     public bool ToBeChanged;
 
-    [Space]
+    private Theme theme;
+    
+    [Space, SerializeField]
     private SpriteRenderer renderer;
 
     [HideInInspector]
@@ -43,6 +45,7 @@ public class Tile : MonoBehaviour
 
     public void SetValue(string text)
     {
+        if (!theme) theme = Resources.LoadAll<Settings>("Settings").First().Theme;
         value = text;
         textMesh.text = value;
 
@@ -50,28 +53,24 @@ public class Tile : MonoBehaviour
         if (value == GameRules.Plus || value == GameRules.Minus)
         {
             type = TileType.Operator1;
-            renderer.color = baseColor = TileGrid.theme.Operator1Color;
+            renderer.color = baseColor = theme.Operator1Color;
         }
         else if (value == GameRules.Multiply || value == GameRules.Divide)
         {
             type = TileType.Operator2;
-            renderer.color = baseColor = TileGrid.theme.Operator2Color;
+            renderer.color = baseColor = theme.Operator2Color;
         }
         else
         {
             type = TileType.Number;
-            renderer.color = baseColor = TileGrid.theme.TileColor;
+            renderer.color = baseColor = theme.TileColor;
         }
-    }
-
-    private void Awake()
-    {
-        renderer = GetComponentInChildren<SpriteRenderer>();
     }
 
     private void Start()
     {
-        textMesh.color = TileGrid.theme.TileTextColor;
+        if (!theme) theme = Resources.LoadAll<Settings>("Settings").First().Theme;
+        textMesh.color = theme.TileTextColor;
     }
 
     public void UpdateTheme(Theme theme)
@@ -135,7 +134,7 @@ public class Tile : MonoBehaviour
     {
         float elapsedTime = 0;
 
-        if (ToBeChanged) end = TileGrid.theme.ChangeColor;
+        if (ToBeChanged) end = theme.ChangeColor;
 
         while (elapsedTime < time)
         {
@@ -246,7 +245,7 @@ public class Tile : MonoBehaviour
     {
         bool isNumber = tile.type == TileType.Number;
 
-        StartCoroutine(tile.ColorFade(TileGrid.theme.SolutionColor, tile.baseColor, 1));
+        StartCoroutine(tile.ColorFade(theme.SolutionColor, tile.baseColor, 1));
 
         StartCoroutine(tile.Resize(1, 0, time));
 
@@ -325,6 +324,6 @@ public class Tile : MonoBehaviour
     {
         ToBeChanged = true;
 
-        StartCoroutine(ColorFade(baseColor, TileGrid.theme.ChangeColor, 1));
+        StartCoroutine(ColorFade(baseColor, theme.ChangeColor, 1));
     }
 }

@@ -53,6 +53,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 512
   ToBeChanged: 0
+  renderer: {fileID: 212661249182510660}
   GameRules: {fileID: 0}
   popupPrefab: {fileID: 588998888173515574, guid: 25719d5bca4ce9d4abcbfe6e1a681bd5,
     type: 3}

@@ -133,7 +133,7 @@ public class GameRules : ScriptableObject
             debug += $"potential answer: {keyValuePair.Key}, frequency: {keyValuePair.Value}\n";
         }
 
-        Debug.Log("Calculations done:" + calculationsDone + "\n" + debug);
+//        Debug.Log("Calculations done:" + calculationsDone + "\n" + debug);
 
         var output = answers.Where(a => a.Value >= frequencyRange.x && a.Value <= frequencyRange.y);
 

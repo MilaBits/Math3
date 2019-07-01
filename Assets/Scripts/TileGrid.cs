@@ -3,7 +3,6 @@ using Sirenix.OdinInspector;
 using Sirenix.Utilities;
 using TMPro;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 
 public class TileGrid : MonoBehaviour
 {
@@ -13,8 +12,7 @@ public class TileGrid : MonoBehaviour
     [InlineEditor, AssetList(Path = "Scripts/Persistent/GridRules")]
     public GameRules GameRules;
 
-    [SerializeField, AssetList(Path = "Resources/Themes"), InlineEditor(InlineEditorObjectFieldModes.CompletelyHidden)]
-    public static Theme theme;
+    public Theme Theme;
 
     [HideInInspector]
     public float spacing = 0.8f;
@@ -23,10 +21,10 @@ public class TileGrid : MonoBehaviour
     private Tile tilePrefab;
 
     [SerializeField, FoldoutGroup("References")]
-    private TextMeshProUGUI GoalText;
+    private TextMeshPro GoalText;
 
     [SerializeField, FoldoutGroup("References")]
-    private TextMeshProUGUI TimeText;
+    private TextMeshPro TimeText;
 
     [SerializeField, FoldoutGroup("References")]
     private SpriteRenderer arrows;
@@ -38,10 +36,10 @@ public class TileGrid : MonoBehaviour
     private Transform tileContainer;
 
     [SerializeField, FoldoutGroup("References")]
-	private AudioSource audioSource;
-	
-	[SerializeField]
-	private ScorePopup popupPrefab;
+    private AudioSource audioSource;
+
+    [SerializeField]
+    private ScorePopup popupPrefab;
 
     public Tile[,] tiles;
 
@@ -56,32 +54,33 @@ public class TileGrid : MonoBehaviour
 
     private Transform popupTarget;
 
-    public void RandomTheme()
+    [SerializeField]
+    private bool manualGrid;
+
+    [Button, ShowIf("manualGrid")]
+    private void GenerateInEditor()
     {
-        var themeArray = Resources.LoadAll<Theme>("Themes");
-        theme = themeArray[Random.Range(0, themeArray.Length)];
-        UpdateTheme();
+        GenerateGrid();
+        GenerateValues();
     }
 
-    public void UpdateTheme()
+    [Button, ShowIf("manualGrid")]
+    private void Clear()
     {
-        foreach (Tile tile in tiles)
+        foreach (Transform child in tileContainer.transform)
         {
-            tile.UpdateTheme(theme);
+            DestroyImmediate(child.gameObject);
         }
+    }
 
-        arrows.color = theme.GridColor;
-        gridlines.color = theme.GridColor;
-
-        TimeText.color = theme.TextColor;
-        GoalText.color = theme.TextColor;
-
-        background.color = theme.BackgroundColor;
+    private void Awake()
+    {
+        Theme = Resources.LoadAll<Settings>("Settings").First().Theme;
     }
 
     void Start()
     {
-        if (!theme) theme = Resources.LoadAll<Theme>("Themes").First(t => t.name.Contains("Default"));
+        changeCount = 0;
 
         GenerateGrid();
 
@@ -91,19 +90,19 @@ public class TileGrid : MonoBehaviour
         GameRules.NextAnswerEvent.AddListener(UpdateGoal);
         UpdateGoal();
 
-        arrows.color = theme.GridColor;
-        gridlines.color = theme.GridColor;
+        arrows.color = Theme.GridColor;
+        gridlines.color = Theme.GridColor;
 
-        TimeText.color = theme.TextColor;
-        GoalText.color = theme.TextColor;
+        TimeText.color = Theme.TextColor;
+        GoalText.color = Theme.TextColor;
 
-        background.color = theme.BackgroundColor;
+        background.color = Theme.BackgroundColor;
     }
 
     public void UpdateGoal()
     {
         audioSource.PlayOneShot(solvedSound);
-        
+
         GoalText.text = GameRules.CurrentAnswer.ToString();
     }
 
@@ -144,7 +143,6 @@ public class TileGrid : MonoBehaviour
                 Tile tile = Instantiate(tilePrefab, tileContainer);
                 tile.GameRules = GameRules;
                 tile.popupTarget = GoalText.transform.position;
-//                tile.Theme = theme;
                 tiles[x, y] = tile;
 
                 tile.transform.localPosition = new Vector2(x * spacing, -y * spacing);
@@ -164,10 +162,6 @@ public class TileGrid : MonoBehaviour
             var filteredList = tiles.FilterCast<Tile>().Where(t => t.type == Tile.TileType.Number && !t.ToBeChanged);
             filteredList.ElementAt(Random.Range(0, filteredList.Count())).MarkToBeChanged();
             changeCount++;
-//            
-//            do randomTile = tiles[Random.Range(0, dimensions.x), Random.Range(0, dimensions.y)];
-//            while (randomTile.type != Tile.TileType.Number && randomTile.ToBeChanged);
-//            randomTile.MarkToBeChanged();
         }
     }
 }

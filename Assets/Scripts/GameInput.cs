@@ -16,7 +16,7 @@ public class GameInput : MonoBehaviour
 
     [SerializeField]
     private Timer timer;
-    
+
     [FoldoutGroup("Audio"), SerializeField]
     private AudioSource audioSource;
 
@@ -36,25 +36,25 @@ public class GameInput : MonoBehaviour
             SceneManager.LoadScene("MainMenu");
         }
 
-        HandleClick(false);
+        HandleClick(null);
     }
 
-    public void HandleClick(bool programmatically)
+    public void HandleClick(Vector3? position)
     {
-        if (Input.GetMouseButtonDown(0) && !lockedInput || programmatically && !lockedInput)
+        if (Input.GetMouseButtonDown(0) && !lockedInput || position != null && !lockedInput)
         {
             audioSource.PlayOneShot(tapSound);
             if (!timer.Running) timer.StartTimer();
 
-            // Lock input untill animations done
+            // Lock input until animations done
             lockedInput = true;
             elapsedTime = 0;
 
             // Get click position
             Vector3 clickPos;
-            if (programmatically)
+            if (position != null)
             {
-                clickPos = Camera.main.ViewportToWorldPoint(new Vector2(Random.value, Random.value));
+                clickPos = Camera.main.ViewportToWorldPoint(new Vector2(position.Value.x, position.Value.y));
             }
             else
             {
@@ -105,7 +105,7 @@ public class GameInput : MonoBehaviour
                 TileMask);
 
             //TODO: buggy corners? (might cause red dupe)
-            
+
             // Move last tile to front
             Vector3 loopPos = closestTile.transform.position;
             Tile lastTile = hits[hits.Length - 1].transform.GetComponent<Tile>();

@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -14,6 +15,8 @@ public class ThemeItem : MonoBehaviour
     [SerializeField]
     private Transform colorPanel;
 
+    private Settings settings;
+
     public void Initialize(Theme theme)
     {
         this.theme = theme;
@@ -23,7 +26,7 @@ public class ThemeItem : MonoBehaviour
 
     public void SetTheme()
     {
-        TileGrid.theme = theme;
+        Resources.LoadAll<Settings>("Settings").First().Theme = theme;
         SceneManager.LoadScene("MainMenu");
     }
 }
