@@ -21,44 +21,40 @@ public class Tutorial : MonoBehaviour
     [SerializeField, BoxGroup("Highlight Settings")]
     private float highlightSpeed;
 
+    [SerializeField, ListDrawerSettings(NumberOfItemsPerPage = 5)]
+    private List<string> gridValues;
+
     [SerializeField, InlineEditor(InlineEditorObjectFieldModes.Hidden)]
     private List<TutorialMessage> tutorialMessages = new List<TutorialMessage>();
 
+    [HideInInspector]
+    public bool overTutorial;
+
     [SerializeField]
+    private int tutorialGoal;
+
+    [SerializeField, FoldoutGroup("References")]
     private TextMeshPro text;
 
-    [SerializeField]
+    [SerializeField, FoldoutGroup("References")]
     private TextMeshProUGUI progressText;
 
-    [SerializeField]
+    [SerializeField, FoldoutGroup("References")]
     private Image progressBar;
 
-    [SerializeField, BoxGroup("Debug")]
-    private Vector2Int highlightSize;
-
-    [SerializeField, BoxGroup("Debug")]
-    private Tile centerTile;
-
-    [SerializeField]
+    [SerializeField, FoldoutGroup("References")]
     private Clicker clicker;
 
-    [SerializeField]
+    [SerializeField, FoldoutGroup("References")]
     private TileGrid grid;
 
-    [SerializeField]
+    [SerializeField, FoldoutGroup("References")]
     private TapAnimation tapAnimation;
-
-    [SerializeField, ListDrawerSettings(NumberOfItemsPerPage = 5)]
-    private List<string> gridValues;
 
     private int currentMessage = 0;
 
     private bool locked = true;
 
-    public bool overTutorial;
-
-    [SerializeField]
-    private int tutorialTarget;
 
     public void setOverTutorial(bool value)
     {
@@ -88,7 +84,7 @@ public class Tutorial : MonoBehaviour
         yield return new WaitForSeconds(0.5f);
         grid.SetGridValues(gridValues);
 
-        grid.GameRules.CurrentAnswer = tutorialTarget;
+        grid.GameRules.CurrentAnswer = tutorialGoal;
         grid.GameRules.NextAnswerEvent.Invoke();
 
         foreach (TutorialMessage tutorialMessage in tutorialMessages)

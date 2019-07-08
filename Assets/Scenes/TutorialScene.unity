@@ -1629,7 +1629,7 @@ GameObject:
   m_Component:
   - component: {fileID: 680081176}
   m_Layer: 0
-  m_Name: GameObject
+  m_Name: Click Reference
   m_TagString: Untagged
   m_Icon: {fileID: -5938655980376293919, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
@@ -2194,25 +2194,6 @@ MonoBehaviour:
   blockSize: 0.8
   paddingSize: 0.2
   highlightSpeed: 0.25
-  tutorialMessages:
-  - {fileID: 11400000, guid: 169a2847c9432c04a90c95254d0e3b9b, type: 2}
-  - {fileID: 11400000, guid: 3e62f35ecc7ba0546b514a0a874f2369, type: 2}
-  - {fileID: 11400000, guid: 0a90935072afea542a771abb08d14caa, type: 2}
-  - {fileID: 11400000, guid: 796817bbaaafe2743a07ea26c44288f4, type: 2}
-  - {fileID: 11400000, guid: c7c2dd72d9e75734a92695de8ef38438, type: 2}
-  - {fileID: 11400000, guid: bea1b78213d0e524e955bb99ef2e321e, type: 2}
-  - {fileID: 11400000, guid: c71c37b3d2207a34e93e73d75c55c8d6, type: 2}
-  - {fileID: 11400000, guid: 785352f400ae6c44f933afa237e5d9a0, type: 2}
-  - {fileID: 11400000, guid: c6e60cc8f0759714b821d74f7e4ffcac, type: 2}
-  - {fileID: 11400000, guid: 15cbe16f4df15364bbbced47b2d6461d, type: 2}
-  text: {fileID: 1990784082}
-  progressText: {fileID: 1648637315}
-  progressBar: {fileID: 850547562}
-  highlightSize: {x: 1, y: 1}
-  centerTile: {fileID: 0}
-  clicker: {fileID: 1115110545}
-  grid: {fileID: 1085919760}
-  tapAnimation: {fileID: 1944268374}
   gridValues:
   - 1
   - 2
@@ -2239,8 +2220,25 @@ MonoBehaviour:
   - 3
   - 4
   - 5
+  tutorialMessages:
+  - {fileID: 11400000, guid: 169a2847c9432c04a90c95254d0e3b9b, type: 2}
+  - {fileID: 11400000, guid: 3e62f35ecc7ba0546b514a0a874f2369, type: 2}
+  - {fileID: 11400000, guid: 0a90935072afea542a771abb08d14caa, type: 2}
+  - {fileID: 11400000, guid: 796817bbaaafe2743a07ea26c44288f4, type: 2}
+  - {fileID: 11400000, guid: c7c2dd72d9e75734a92695de8ef38438, type: 2}
+  - {fileID: 11400000, guid: bea1b78213d0e524e955bb99ef2e321e, type: 2}
+  - {fileID: 11400000, guid: c71c37b3d2207a34e93e73d75c55c8d6, type: 2}
+  - {fileID: 11400000, guid: 785352f400ae6c44f933afa237e5d9a0, type: 2}
+  - {fileID: 11400000, guid: c6e60cc8f0759714b821d74f7e4ffcac, type: 2}
+  - {fileID: 11400000, guid: 15cbe16f4df15364bbbced47b2d6461d, type: 2}
   overTutorial: 0
-  tutorialTarget: 15
+  tutorialGoal: 15
+  text: {fileID: 1990784082}
+  progressText: {fileID: 1648637315}
+  progressBar: {fileID: 850547562}
+  clicker: {fileID: 1115110545}
+  grid: {fileID: 1085919760}
+  tapAnimation: {fileID: 1944268374}
 --- !u!114 &1115110545
 MonoBehaviour:
   m_ObjectHideFlags: 0
