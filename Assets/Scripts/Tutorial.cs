@@ -45,6 +45,9 @@ public class Tutorial : MonoBehaviour
     [SerializeField]
     private TileGrid grid;
 
+    [SerializeField]
+    private TapAnimation tapAnimation;
+
     [SerializeField, ListDrawerSettings(NumberOfItemsPerPage = 5)]
     private List<string> gridValues;
 
@@ -84,7 +87,7 @@ public class Tutorial : MonoBehaviour
     {
         yield return new WaitForSeconds(0.5f);
         grid.SetGridValues(gridValues);
-        
+
         grid.GameRules.CurrentAnswer = tutorialTarget;
         grid.GameRules.NextAnswerEvent.Invoke();
 
@@ -161,6 +164,7 @@ public class Tutorial : MonoBehaviour
         foreach (var click in message.Clicks)
         {
             clicker.Click(click);
+            tapAnimation.Play(click);
             yield return new WaitForSeconds(message.ClickInterval);
         }
     }

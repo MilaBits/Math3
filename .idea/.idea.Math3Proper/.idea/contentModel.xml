@@ -154,6 +154,7 @@
           <e p="SceneSwitcher.cs" t="Include" />
           <e p="ScorePopup.cs" t="Include" />
           <e p="Settings.cs" t="Include" />
+          <e p="TapAnimation.cs" t="Include" />
           <e p="Theme.cs" t="Include" />
           <e p="ThemeItem.cs" t="Include" />
           <e p="ThemeMenu.cs" t="Include" />
