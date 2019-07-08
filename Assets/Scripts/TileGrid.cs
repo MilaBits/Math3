@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System.Collections.Generic;
+using System.Linq;
 using Sirenix.OdinInspector;
 using Sirenix.Utilities;
 using TMPro;
@@ -6,13 +7,13 @@ using UnityEngine;
 
 public class TileGrid : MonoBehaviour
 {
-    [BoxGroup("Grid Settings", false)]
+    [ReadOnly]
+    public Theme Theme;
+
     public Vector2Int dimensions;
 
     [InlineEditor, AssetList(Path = "Scripts/Persistent/GridRules")]
     public GameRules GameRules;
-
-    public Theme Theme;
 
     [HideInInspector]
     public float spacing = 0.8f;
@@ -38,12 +39,12 @@ public class TileGrid : MonoBehaviour
     [SerializeField, FoldoutGroup("References")]
     private AudioSource audioSource;
 
-    [SerializeField]
+    [SerializeField, FoldoutGroup("References")]
     private ScorePopup popupPrefab;
 
     public Tile[,] tiles;
 
-    [SerializeField]
+    [SerializeField, FoldoutGroup("References")]
     private AudioClip solvedSound;
 
     [HideInInspector]
@@ -53,25 +54,6 @@ public class TileGrid : MonoBehaviour
     private SpriteRenderer background;
 
     private Transform popupTarget;
-
-    [SerializeField]
-    private bool manualGrid;
-
-    [Button, ShowIf("manualGrid")]
-    private void GenerateInEditor()
-    {
-        GenerateGrid();
-        GenerateValues();
-    }
-
-    [Button, ShowIf("manualGrid")]
-    private void Clear()
-    {
-        foreach (Transform child in tileContainer.transform)
-        {
-            DestroyImmediate(child.gameObject);
-        }
-    }
 
     private void Awake()
     {
@@ -115,6 +97,27 @@ public class TileGrid : MonoBehaviour
 
         EnsureSingleOperators();
         MarkRandomToBeChanged(true);
+    }
+
+    public void SetGridValues(List<string> values)
+    {
+        int i = 0;
+        foreach (var tile in tiles)
+        {
+            if (values[i] == "+") values[i] = GameRules.Plus;
+            if (values[i] == "-") values[i] = GameRules.Minus;
+            if (values[i] == "x") values[i] = GameRules.Multiply;
+            if (values[i] == "/") values[i] = GameRules.Divide;
+            tile.SetValue(values[i]);
+
+            if (tile.ToBeChanged) tile.UnMarkToBeChanged();
+
+            i++;
+        }
+
+        changeCount = 0;
+        MarkSpecificToBeChanged(new Vector2Int(2,0));
+        MarkSpecificToBeChanged(new Vector2Int(4,1));
     }
 
     private void EnsureSingleOperators()
@@ -163,5 +166,11 @@ public class TileGrid : MonoBehaviour
             filteredList.ElementAt(Random.Range(0, filteredList.Count())).MarkToBeChanged();
             changeCount++;
         }
+    }
+
+    public void MarkSpecificToBeChanged(Vector2Int pos)
+    {
+        tiles[pos.x, pos.y].MarkToBeChanged();
+        changeCount++;
     }
 }

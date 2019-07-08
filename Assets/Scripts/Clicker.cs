@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using UnityEditor;
 using UnityEngine;
 
 public class Clicker : MonoBehaviour
@@ -17,6 +18,9 @@ public class Clicker : MonoBehaviour
 
     public void Click(Vector2 position)
     {
+        //TODO: make background clickable during tutorial
+        Debug.DrawLine(position, position + new Vector2(1, 0), Color.red, 1f);
+        Debug.DrawLine(position, position + new Vector2(0, 1), Color.red, 1f);
         gameInput.HandleClick(position);
     }
 

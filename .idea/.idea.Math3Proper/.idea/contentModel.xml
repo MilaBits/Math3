@@ -150,6 +150,7 @@
           <e p="GameRules.cs" t="Include" />
           <e p="HighlightTarget.cs" t="Include" />
           <e p="MainMenu.cs" t="Include" />
+          <e p="Results.cs" t="Include" />
           <e p="SceneSwitcher.cs" t="Include" />
           <e p="ScorePopup.cs" t="Include" />
           <e p="Settings.cs" t="Include" />

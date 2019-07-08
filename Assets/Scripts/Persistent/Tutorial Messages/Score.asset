@@ -12,9 +12,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a53d09b95d632604f894d86d11f5157f, type: 3}
   m_Name: Score
   m_EditorClassIdentifier: 
-  Text: Your current goal is shown above the grid
+  Text: Move tiles into place to create a match.
   target:
-    Position: {x: 0, y: -0.5}
+    OffGrid: 0
+    Position: {x: -0.8, y: -0.5}
     Transform: {fileID: 0}
-    Size: {x: 5, y: 8}
+    Size: {x: 3, y: 1}
+  WaitForInput: 1
   duration: 10
+  ClickInterval: 0.5
+  Clicks:
+  - {x: 2.4, y: 0.3}
+  - {x: 2.4, y: 0.3}
+  - {x: 2.4, y: 0.3}
+  - {x: -0.8, y: 1.8}
+  - {x: 0, y: -2.8}
+  - {x: 0, y: -2.8}

@@ -1,5 +1,7 @@
-﻿using Sirenix.OdinInspector;
+﻿using System.Linq;
+using Sirenix.OdinInspector;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.SceneManagement;
 
 public class GameInput : MonoBehaviour
@@ -8,6 +10,7 @@ public class GameInput : MonoBehaviour
 
     public LayerMask TileMask;
     public LayerMask BackgroundMask;
+    public LayerMask InputBlockMask;
 
     public float SlideDuration = 0.5f;
 
@@ -29,6 +32,9 @@ public class GameInput : MonoBehaviour
     [FoldoutGroup("Audio"), SerializeField]
     private AudioClip swapSound;
 
+    [SerializeField]
+    private Tutorial tutorial;
+
     void Update()
     {
         if (Input.GetKey(KeyCode.Escape))
@@ -43,6 +49,8 @@ public class GameInput : MonoBehaviour
     {
         if (Input.GetMouseButtonDown(0) && !lockedInput || position != null && !lockedInput)
         {
+            if (tutorial && position == null) return;
+
             audioSource.PlayOneShot(tapSound);
             if (!timer.Running) timer.StartTimer();
 
@@ -54,14 +62,19 @@ public class GameInput : MonoBehaviour
             Vector3 clickPos;
             if (position != null)
             {
-                clickPos = Camera.main.ViewportToWorldPoint(new Vector2(position.Value.x, position.Value.y));
+//                clickPos = Camera.main.ViewportToWorldPoint(new Vector2(position.Value.x, position.Value.y));
+                clickPos = (Vector2)position;
             }
             else
             {
                 clickPos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
             }
 
-            RaycastHit2D hit = Physics2D.Raycast(clickPos, Vector2.zero);
+            RaycastHit2D[] tapHits = Physics2D.RaycastAll(clickPos, Vector3.forward * 11);
+
+            if (tapHits.Any(x => ((1 << x.transform.gameObject.layer) & InputBlockMask) != 0)) return;
+            if (tapHits.Any(x => ((1 << x.transform.gameObject.layer) & TileMask) != 0)) return;
+            RaycastHit2D hit = tapHits.First(x => ((1 << x.transform.gameObject.layer) & BackgroundMask) != 0);
 
             // Make sure player taps outside the grid
             if (hit.collider != null && BackgroundMask == (BackgroundMask | (1 << hit.transform.gameObject.layer)))

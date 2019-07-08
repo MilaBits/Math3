@@ -12,9 +12,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a53d09b95d632604f894d86d11f5157f, type: 3}
   m_Name: Slide
   m_EditorClassIdentifier: 
-  Text: Slide tiles by tapping the arrows on each edge
+  Text: Move tiles by tapping the arrows on the border.
   target:
+    OffGrid: 0
     Position: {x: 0, y: -1.5}
     Transform: {fileID: 0}
     Size: {x: 7, y: 1}
-  duration: 10
+  WaitForInput: 1
+  duration: 5
+  ClickInterval: 0.5
+  Clicks:
+  - {x: -2.43, y: -1.5}
+  - {x: -2.43, y: -1.5}
+  - {x: -2.43, y: -1.5}
+  - {x: 2.43, y: -1.5}
+  - {x: 2.43, y: -1.5}
+  - {x: 2.43, y: -1.5}

@@ -10,15 +10,15 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: a53d09b95d632604f894d86d11f5157f, type: 3}
-  m_Name: Greetings
+  m_Name: Matching
   m_EditorClassIdentifier: 
-  Text: Welcome to Math-3!
+  Text: Match numbers together to meet the target sum.
   target:
-    OffGrid: 0
-    Position: {x: 0, y: -0.5}
+    OffGrid: 1
+    Position: {x: 0, y: 2.4}
     Transform: {fileID: 0}
-    Size: {x: 5, y: 5}
+    Size: {x: 2, y: 1}
   WaitForInput: 1
-  duration: 3
+  duration: 0
   ClickInterval: 0
   Clicks: []

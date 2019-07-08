@@ -45,6 +45,23 @@ public class Tutorial : MonoBehaviour
     [SerializeField]
     private TileGrid grid;
 
+    [SerializeField, ListDrawerSettings(NumberOfItemsPerPage = 5)]
+    private List<string> gridValues;
+
+    private int currentMessage = 0;
+
+    private bool locked = true;
+
+    public bool overTutorial;
+
+    [SerializeField]
+    private int tutorialTarget;
+
+    public void setOverTutorial(bool value)
+    {
+        overTutorial = value;
+    }
+
     private void Start()
     {
         StartCoroutine(DelayedStart());
@@ -55,31 +72,39 @@ public class Tutorial : MonoBehaviour
         Resources.LoadAll<Settings>("Settings").First().WatchedTutorial = true;
     }
 
+    private void Update()
+    {
+        if (Input.GetMouseButtonDown(0) && tutorialMessages[currentMessage].WaitForInput && overTutorial)
+        {
+            NextMessage();
+        }
+    }
+
     IEnumerator DelayedStart()
     {
         yield return new WaitForSeconds(0.5f);
+        grid.SetGridValues(gridValues);
+        
+        grid.GameRules.CurrentAnswer = tutorialTarget;
+        grid.GameRules.NextAnswerEvent.Invoke();
 
         foreach (TutorialMessage tutorialMessage in tutorialMessages)
         {
             tutorialMessage.target.Transform = GetClosestTile(tutorialMessage.target.Position).transform;
         }
 
-        StartCoroutine(PlayTutorial(0));
+        locked = false;
+        NextMessage();
     }
 
-    private IEnumerator PlayTutorial(int index)
+    private void LoadTutorialMessage()
     {
-        if (tutorialMessages.Count <= index)
-        {
-            Destroy(gameObject);
-            yield break;
-        }
+        locked = true;
 
+        progressText.text = $"{currentMessage + 1}/{tutorialMessages.Count}";
+        UpdateHighlight(tutorialMessages[currentMessage]);
 
-        progressText.text = $"{index + 1}/{tutorialMessages.Count}";
-        UpdateHighlight(tutorialMessages[index]);
-        yield return new WaitForSeconds(tutorialMessages[index].duration);
-        StartCoroutine(PlayTutorial(index + 1));
+        currentMessage++;
     }
 
     private Tile GetClosestTile(Vector2 position)
@@ -100,28 +125,49 @@ public class Tutorial : MonoBehaviour
         return closestTile;
     }
 
-    private IEnumerator FillBar(float t)
+    private IEnumerator FillBar()
     {
-        for (float e = 0; e < t; e += Time.deltaTime)
+        float start = progressBar.fillAmount;
+        for (float progress = 0; progress < highlightSpeed; progress += Time.deltaTime)
         {
-            progressBar.fillAmount = e / t;
+            progressBar.fillAmount =
+                Mathf.Lerp(start, (float) currentMessage / tutorialMessages.Count, progress / highlightSpeed);
             yield return null;
         }
 
-        progressBar.fillAmount = 1;
+        progressBar.fillAmount = (float) currentMessage / tutorialMessages.Count;
     }
 
     private void UpdateHighlight(TutorialMessage message)
     {
         text.text = message.Text;
 
+        StartCoroutine(FillBar());
+        Vector3 position = message.target.OffGrid
+            ? (Vector3) message.target.Position
+            : message.target.Transform.position;
+
+        StartCoroutine(DoClicks(message));
         StartCoroutine(MoveHighlight(
-            message.target.Transform.position,
+            position,
             new Vector2(
                 message.target.Size.x * blockSize + paddingSize,
                 message.target.Size.y * blockSize + paddingSize),
             highlightSpeed));
-        StartCoroutine(FillBar(message.duration));
+    }
+
+    private IEnumerator DoClicks(TutorialMessage message)
+    {
+        foreach (var click in message.Clicks)
+        {
+            clicker.Click(click);
+            yield return new WaitForSeconds(message.ClickInterval);
+        }
+    }
+
+    public void NextMessage()
+    {
+        if (!locked) LoadTutorialMessage();
     }
 
     private IEnumerator MoveHighlight(Vector2 targetPosition, Vector2 targetSize, float t)
@@ -139,5 +185,8 @@ public class Tutorial : MonoBehaviour
 
         highlight.position = targetPosition;
         highlight.sizeDelta = targetSize;
+
+        locked = false;
+        if (currentMessage >= tutorialMessages.Count) Destroy(gameObject);
     }
 }

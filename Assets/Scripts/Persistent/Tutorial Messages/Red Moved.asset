@@ -10,15 +10,16 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: a53d09b95d632604f894d86d11f5157f, type: 3}
-  m_Name: Greetings
+  m_Name: Red Moved
   m_EditorClassIdentifier: 
-  Text: Welcome to Math-3!
+  Text: '...a new number is created!'
   target:
     OffGrid: 0
-    Position: {x: 0, y: -0.5}
+    Position: {x: -1.5, y: 0.5}
     Transform: {fileID: 0}
-    Size: {x: 5, y: 5}
+    Size: {x: 1, y: 1}
   WaitForInput: 1
-  duration: 3
-  ClickInterval: 0
-  Clicks: []
+  duration: 5
+  ClickInterval: 0.2
+  Clicks:
+  - {x: -2.65, y: 0.33}

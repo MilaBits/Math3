@@ -22,7 +22,7 @@ public class Tile : MonoBehaviour
     public bool ToBeChanged;
 
     private Theme theme;
-    
+
     [Space, SerializeField]
     private SpriteRenderer renderer;
 
@@ -323,7 +323,12 @@ public class Tile : MonoBehaviour
     public void MarkToBeChanged()
     {
         ToBeChanged = true;
-
         StartCoroutine(ColorFade(baseColor, theme.ChangeColor, 1));
+    }
+
+    public void UnMarkToBeChanged()
+    {
+        ToBeChanged = false;
+        StartCoroutine(ColorFade(theme.ChangeColor, baseColor, 1));
     }
 }

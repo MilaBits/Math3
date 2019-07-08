@@ -14,7 +14,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Text: Remaining time is shown below the grid.
   target:
-    Position: {x: 0, y: -0.5}
+    OffGrid: 1
+    Position: {x: 0, y: -3.5}
     Transform: {fileID: 0}
-    Size: {x: 5, y: 8}
+    Size: {x: 2, y: 1}
+  WaitForInput: 1
   duration: 10

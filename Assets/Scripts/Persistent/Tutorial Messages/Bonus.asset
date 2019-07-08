@@ -12,9 +12,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a53d09b95d632604f894d86d11f5157f, type: 3}
   m_Name: Bonus
   m_EditorClassIdentifier: 
-  Text: Regain time with each correct answer
+  Text: Each match adds to your time limit.
   target:
-    Position: {x: 0, y: -0.5}
+    OffGrid: 1
+    Position: {x: 0, y: -3.5}
     Transform: {fileID: 0}
-    Size: {x: 5, y: 8}
+    Size: {x: 2, y: 1}
+  WaitForInput: 1
   duration: 10
+  ClickInterval: 0
+  Clicks: []

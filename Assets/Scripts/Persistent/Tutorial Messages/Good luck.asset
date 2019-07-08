@@ -12,9 +12,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a53d09b95d632604f894d86d11f5157f, type: 3}
   m_Name: Good luck
   m_EditorClassIdentifier: 
-  Text: Good luck!
+  Text: Make as many matches in the time allowed!
   target:
+    OffGrid: 0
     Position: {x: 0, y: -0.5}
     Transform: {fileID: 0}
-    Size: {x: 15, y: 15}
+    Size: {x: 7, y: 7}
+  WaitForInput: 1
   duration: 10
