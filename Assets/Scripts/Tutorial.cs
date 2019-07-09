@@ -51,6 +51,9 @@ public class Tutorial : MonoBehaviour
     [SerializeField, FoldoutGroup("References")]
     private TapAnimation tapAnimation;
 
+    [SerializeField, FoldoutGroup("References")]
+    private Canvas pauseCanvas;
+    
     private int currentMessage = 0;
 
     private bool locked = true;
@@ -188,6 +191,10 @@ public class Tutorial : MonoBehaviour
         highlight.position = targetPosition;
         highlight.sizeDelta = targetSize;
 
-        if (currentMessage >= tutorialMessages.Count) Destroy(gameObject);
+        if (currentMessage >= tutorialMessages.Count)
+        {
+            pauseCanvas.gameObject.SetActive(true);
+            Destroy(gameObject);
+        }
     }
 }

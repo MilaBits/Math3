@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System;
+using System.Linq;
 using Sirenix.OdinInspector;
 using UnityEngine;
 using UnityEngine.EventSystems;
@@ -49,6 +50,7 @@ public class GameInput : MonoBehaviour
     {
         if (Input.GetMouseButtonDown(0) && !lockedInput || position != null && !lockedInput)
         {
+            if (timer.Paused) return;
             if (tutorial && position == null) return;
 
             audioSource.PlayOneShot(tapSound);
