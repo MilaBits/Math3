@@ -2060,46 +2060,6 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1113202414, guid: 02abe833cfe11e74991dd4cdeac98d34, type: 3}
-      propertyPath: TimeOver.m_PersistentCalls.m_Calls.Array.size
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1113202414, guid: 02abe833cfe11e74991dd4cdeac98d34, type: 3}
-      propertyPath: TimeOver.m_PersistentCalls.m_Calls.Array.data[0].m_Target
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 1113202414, guid: 02abe833cfe11e74991dd4cdeac98d34, type: 3}
-      propertyPath: TimeOver.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 1113202414, guid: 02abe833cfe11e74991dd4cdeac98d34, type: 3}
-      propertyPath: TimeOver.m_PersistentCalls.m_Calls.Array.data[1].m_Mode
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 1113202414, guid: 02abe833cfe11e74991dd4cdeac98d34, type: 3}
-      propertyPath: TimeOver.m_PersistentCalls.m_Calls.Array.data[1].m_Arguments.m_BoolArgument
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 1113202414, guid: 02abe833cfe11e74991dd4cdeac98d34, type: 3}
-      propertyPath: TimeOver.m_PersistentCalls.m_Calls.Array.data[1].m_CallState
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 1113202414, guid: 02abe833cfe11e74991dd4cdeac98d34, type: 3}
-      propertyPath: TimeOver.m_PersistentCalls.m_Calls.Array.data[1].m_Target
-      value: 
-      objectReference: {fileID: 729715945}
-    - target: {fileID: 1113202414, guid: 02abe833cfe11e74991dd4cdeac98d34, type: 3}
-      propertyPath: TimeOver.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_BoolArgument
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1113202414, guid: 02abe833cfe11e74991dd4cdeac98d34, type: 3}
-      propertyPath: TimeOver.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 1113202414, guid: 02abe833cfe11e74991dd4cdeac98d34, type: 3}
-      propertyPath: TimeOver.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 1113202414, guid: 02abe833cfe11e74991dd4cdeac98d34, type: 3}
       propertyPath: results
       value: 
       objectReference: {fileID: 729715950}

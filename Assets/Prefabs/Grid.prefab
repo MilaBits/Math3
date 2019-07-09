@@ -871,9 +871,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d7acb5ea3cfef1d499e7caeead0fdf3c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Theme: {fileID: 0}
   dimensions: {x: 5, y: 5}
   GameRules: {fileID: 11400000, guid: 43185d07562b8bd4787a0d0dd0860f28, type: 2}
-  Theme: {fileID: 0}
   spacing: 0.8
   tilePrefab: {fileID: 114171866383003328, guid: 7c0f59dfc90ba3c48b88ee330fbd3caa,
     type: 3}
@@ -888,7 +888,7 @@ MonoBehaviour:
   solvedSound: {fileID: 8300000, guid: 93fd068999df8664398ead2e641a3902, type: 3}
   changeCount: 2
   background: {fileID: 0}
-  manualGrid: 0
+  SolvedCount: 0
 --- !u!114 &1113202414
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -905,20 +905,10 @@ MonoBehaviour:
   timeText: {fileID: 1379156392}
   bonusTimeText: {fileID: 1026291003}
   bonusTimeAnimator: {fileID: 1026291002}
+  results: {fileID: 0}
   TimeOver:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 0}
-        m_MethodName: SetActive
-        m_Mode: 6
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 1
-        m_CallState: 2
+      m_Calls: []
     m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
       Culture=neutral, PublicKeyToken=null
 --- !u!1 &3740198202029830870

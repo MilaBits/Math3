@@ -10,11 +10,11 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Assets/Scripts/Tutorial.cs">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="563">
-              <caret line="187" column="44" lean-forward="true" selection-start-line="187" selection-start-column="44" selection-end-line="187" selection-end-column="44" />
+            <state relative-caret-position="248">
+              <caret line="166" column="23" lean-forward="true" selection-start-line="166" selection-start-column="23" selection-end-line="166" selection-end-column="23" />
               <folding>
                 <marker date="1562703494180" expanded="false" signature="6:184" ph="..." />
                 <marker date="1562703494180" expanded="true" signature="223:5348" ph="{...}" />
@@ -69,11 +69,11 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="false">
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/Assets/Scripts/Timer.cs">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="683">
-              <caret line="88" column="33" selection-start-line="88" selection-start-column="33" selection-end-line="88" selection-end-column="33" />
+            <state relative-caret-position="548">
+              <caret line="79" column="51" lean-forward="true" selection-start-line="79" selection-start-column="51" selection-end-line="79" selection-end-column="51" />
               <folding>
                 <marker date="1562702569269" expanded="false" signature="6:154" ph="..." />
                 <marker date="1562702569269" expanded="true" signature="190:2050" ph="{...}" />
@@ -816,25 +816,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Assets/Scripts/Timer.cs">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="683">
-          <caret line="88" column="33" selection-start-line="88" selection-start-column="33" selection-end-line="88" selection-end-column="33" />
-          <folding>
-            <marker date="1562702569269" expanded="false" signature="6:154" ph="..." />
-            <marker date="1562702569269" expanded="true" signature="190:2050" ph="{...}" />
-            <marker date="1562702569269" expanded="true" signature="716:917" ph="{...}" />
-            <marker date="1562702569269" expanded="true" signature="947:1032" ph="{...}" />
-            <marker date="1562702569269" expanded="true" signature="1061:1098" ph="{...}" />
-            <marker date="1562702569269" expanded="true" signature="1130:1308" ph="{...}" />
-            <marker date="1562702569269" expanded="true" signature="1327:1822" ph="{...}" />
-            <marker date="1562702569269" expanded="true" signature="1354:1816" ph="{...}" />
-            <marker date="1562702569269" expanded="true" signature="1542:1806" ph="{...}" />
-            <marker date="1562702569269" expanded="true" signature="1864:2048" ph="{...}" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/Assets/Scripts/Results.cs">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="210">
@@ -849,8 +830,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/Assets/Scripts/Tutorial.cs">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="563">
-          <caret line="187" column="44" lean-forward="true" selection-start-line="187" selection-start-column="44" selection-end-line="187" selection-end-column="44" />
+        <state relative-caret-position="248">
+          <caret line="166" column="23" lean-forward="true" selection-start-line="166" selection-start-column="23" selection-end-line="166" selection-end-column="23" />
           <folding>
             <marker date="1562703494180" expanded="false" signature="6:184" ph="..." />
             <marker date="1562703494180" expanded="true" signature="223:5348" ph="{...}" />
@@ -872,6 +853,25 @@
             <marker date="1562703494180" expanded="true" signature="4661:4717" ph="{...}" />
             <marker date="1562703494180" expanded="true" signature="4809:5346" ph="{...}" />
             <marker date="1562703494180" expanded="true" signature="4966:5176" ph="{...}" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Assets/Scripts/Timer.cs">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="548">
+          <caret line="79" column="51" lean-forward="true" selection-start-line="79" selection-start-column="51" selection-end-line="79" selection-end-column="51" />
+          <folding>
+            <marker date="1562702569269" expanded="false" signature="6:154" ph="..." />
+            <marker date="1562702569269" expanded="true" signature="190:2050" ph="{...}" />
+            <marker date="1562702569269" expanded="true" signature="716:917" ph="{...}" />
+            <marker date="1562702569269" expanded="true" signature="947:1032" ph="{...}" />
+            <marker date="1562702569269" expanded="true" signature="1061:1098" ph="{...}" />
+            <marker date="1562702569269" expanded="true" signature="1130:1308" ph="{...}" />
+            <marker date="1562702569269" expanded="true" signature="1327:1822" ph="{...}" />
+            <marker date="1562702569269" expanded="true" signature="1354:1816" ph="{...}" />
+            <marker date="1562702569269" expanded="true" signature="1542:1806" ph="{...}" />
+            <marker date="1562702569269" expanded="true" signature="1864:2048" ph="{...}" />
           </folding>
         </state>
       </provider>

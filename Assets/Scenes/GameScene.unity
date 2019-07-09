@@ -927,6 +927,7 @@ GameObject:
   - component: {fileID: 729715948}
   - component: {fileID: 729715947}
   - component: {fileID: 729715946}
+  - component: {fileID: 729715950}
   m_Layer: 5
   m_Name: Result Screen
   m_TagString: Untagged
@@ -1014,6 +1015,20 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 0}
+--- !u!114 &729715950
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 729715945}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 32c9b9336e721c448a266fa7a55a0850, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  solvedText: {fileID: 627957574}
+  timeText: {fileID: 629483644}
 --- !u!1 &762046822
 GameObject:
   m_ObjectHideFlags: 0
@@ -1285,6 +1300,10 @@ PrefabInstance:
       propertyPath: TimeOver.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 729715945}
+    - target: {fileID: 1113202414, guid: 02abe833cfe11e74991dd4cdeac98d34, type: 3}
+      propertyPath: results
+      value: 
+      objectReference: {fileID: 729715950}
     - target: {fileID: 778657467, guid: 02abe833cfe11e74991dd4cdeac98d34, type: 3}
       propertyPath: m_Mesh
       value: 
@@ -1683,6 +1702,7 @@ MonoBehaviour:
   tapSound: {fileID: 8300000, guid: b5cd01c964dc2704eb2cd28a35ef8213, type: 3}
   slideSound: {fileID: 8300000, guid: ed4a7d6355825384ebaa2500e13b437e, type: 3}
   swapSound: {fileID: 8300000, guid: fdc59055626222d41bed6cc0ef4015bd, type: 3}
+  tutorial: {fileID: 0}
 --- !u!4 &1467125488
 Transform:
   m_ObjectHideFlags: 0
