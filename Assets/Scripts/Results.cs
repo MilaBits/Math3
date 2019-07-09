@@ -1,18 +1,26 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 
 public class Results : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+    [SerializeField]
+    private TextMeshProUGUI solvedText;
 
-    // Update is called once per frame
-    void Update()
+    [SerializeField]
+    private TextMeshProUGUI timeText;
+
+    public void SetResults(int solved, float time)
     {
+        TimeSpan span = TimeSpan.FromMilliseconds(time);
+
+        string sm = solved != 1 ? "es" : "";
+        solvedText.text = $"You made {solved} match{sm}!";
         
+        string ms = span.Minutes != 1 ? "s" : "";
+        string ss = span.Seconds != 1 ? "s" : "";
+        timeText.text = $"You lasted {span.Minutes} minute{ms} and {span.Seconds} second{ss}";
     }
 }

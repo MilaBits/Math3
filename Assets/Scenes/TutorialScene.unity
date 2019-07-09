@@ -1317,7 +1317,7 @@ GameObject:
   - component: {fileID: 627957575}
   - component: {fileID: 627957574}
   m_Layer: 5
-  m_Name: Text (TMP) (1)
+  m_Name: Solved
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1474,7 +1474,7 @@ GameObject:
   - component: {fileID: 629483645}
   - component: {fileID: 629483644}
   m_Layer: 5
-  m_Name: Text (TMP) (2)
+  m_Name: Time
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1761,6 +1761,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 32c9b9336e721c448a266fa7a55a0850, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  solvedText: {fileID: 627957574}
+  timeText: {fileID: 629483644}
 --- !u!1 &805608350
 GameObject:
   m_ObjectHideFlags: 0
@@ -2058,9 +2060,49 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1113202414, guid: 02abe833cfe11e74991dd4cdeac98d34, type: 3}
+      propertyPath: TimeOver.m_PersistentCalls.m_Calls.Array.size
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1113202414, guid: 02abe833cfe11e74991dd4cdeac98d34, type: 3}
       propertyPath: TimeOver.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 1113202414, guid: 02abe833cfe11e74991dd4cdeac98d34, type: 3}
+      propertyPath: TimeOver.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 1113202414, guid: 02abe833cfe11e74991dd4cdeac98d34, type: 3}
+      propertyPath: TimeOver.m_PersistentCalls.m_Calls.Array.data[1].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1113202414, guid: 02abe833cfe11e74991dd4cdeac98d34, type: 3}
+      propertyPath: TimeOver.m_PersistentCalls.m_Calls.Array.data[1].m_Arguments.m_BoolArgument
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1113202414, guid: 02abe833cfe11e74991dd4cdeac98d34, type: 3}
+      propertyPath: TimeOver.m_PersistentCalls.m_Calls.Array.data[1].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1113202414, guid: 02abe833cfe11e74991dd4cdeac98d34, type: 3}
+      propertyPath: TimeOver.m_PersistentCalls.m_Calls.Array.data[1].m_Target
+      value: 
       objectReference: {fileID: 729715945}
+    - target: {fileID: 1113202414, guid: 02abe833cfe11e74991dd4cdeac98d34, type: 3}
+      propertyPath: TimeOver.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_BoolArgument
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1113202414, guid: 02abe833cfe11e74991dd4cdeac98d34, type: 3}
+      propertyPath: TimeOver.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1113202414, guid: 02abe833cfe11e74991dd4cdeac98d34, type: 3}
+      propertyPath: TimeOver.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 1113202414, guid: 02abe833cfe11e74991dd4cdeac98d34, type: 3}
+      propertyPath: results
+      value: 
+      objectReference: {fileID: 729715950}
     - target: {fileID: 778657467, guid: 02abe833cfe11e74991dd4cdeac98d34, type: 3}
       propertyPath: m_Mesh
       value: 
@@ -2945,8 +2987,8 @@ MonoBehaviour:
   m_outlineColor:
     serializedVersion: 2
     rgba: 4278190080
-  m_fontSize: 0.3
-  m_fontSizeBase: 0.3
+  m_fontSize: 0.25
+  m_fontSizeBase: 0.25
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -3057,7 +3099,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: 0, y: -514.4}
-  m_SizeDelta: {x: 0, y: -1272.3939}
+  m_SizeDelta: {x: 0, y: -1271.1055}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1687210227
 MonoBehaviour:

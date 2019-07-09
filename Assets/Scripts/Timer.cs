@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using Microsoft.Win32;
 using UnityEngine;
 using TMPro;
 using UnityEngine.Events;
@@ -19,6 +20,11 @@ public class Timer : MonoBehaviour
     [SerializeField]
     private Animator bonusTimeAnimator;
 
+    [SerializeField]
+    private Results results;
+
+    private float timePassed;
+
     public bool GameOver { get; private set; }
 
     public bool Running { get; private set; }
@@ -28,6 +34,7 @@ public class Timer : MonoBehaviour
     public UnityEvent TimeOver;
 
     private TimeSpan timeSpan;
+
 
     protected void Start()
     {
@@ -60,6 +67,7 @@ public class Timer : MonoBehaviour
         if (Running)
         {
             remainingTime -= Time.deltaTime * 1000;
+            timePassed += Time.deltaTime * 1000;
 
             SetTimeText(remainingTime);
 
@@ -68,6 +76,9 @@ public class Timer : MonoBehaviour
                 GameOver = true;
                 Running = false;
                 TimeOver.Invoke();
+                
+                results.gameObject.SetActive(true);
+                results.SetResults(grid.SolvedCount, timePassed);
             }
         }
     }
@@ -75,6 +86,7 @@ public class Timer : MonoBehaviour
     private void SetTimeText(float time)
     {
         TimeSpan t = TimeSpan.FromMilliseconds(time);
-        timeText.text = new DateTime(t.Ticks).ToString("m:ss");
+//        timeText.text = new DateTime(t.Ticks).ToString("m:ss");
+        timeText.text = $"{t.Minutes}:{t.Seconds}";
     }
 }

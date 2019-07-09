@@ -73,7 +73,7 @@ public class Tutorial : MonoBehaviour
 
     private void Update()
     {
-        if (Input.GetMouseButtonDown(0) && tutorialMessages[currentMessage].WaitForInput && overTutorial)
+        if (Input.GetMouseButtonDown(0) && tutorialMessages[currentMessage].WaitForInput && overTutorial && !locked)
         {
             NextMessage();
         }
@@ -163,6 +163,8 @@ public class Tutorial : MonoBehaviour
             tapAnimation.Play(click);
             yield return new WaitForSeconds(message.ClickInterval);
         }
+
+        locked = false;
     }
 
     public void NextMessage()
@@ -186,7 +188,6 @@ public class Tutorial : MonoBehaviour
         highlight.position = targetPosition;
         highlight.sizeDelta = targetSize;
 
-        locked = false;
         if (currentMessage >= tutorialMessages.Count) Destroy(gameObject);
     }
 }

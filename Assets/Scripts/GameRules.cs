@@ -40,17 +40,10 @@ public class GameRules : ScriptableObject
 
     private TileGrid grid;
 
-    private int calculationsDone = 0;
-
     public static string Plus = "\u002B";
     public static string Minus = "-";
     public static string Multiply = "\u00D7";
     public static string Divide = "\u00F7";
-
-    public string Combined
-    {
-        get { return "Answer: " + this.CurrentAnswer; }
-    }
 
     public void Instantiate(TileGrid grid)
     {
@@ -61,7 +54,6 @@ public class GameRules : ScriptableObject
 
     private IEnumerable<KeyValuePair<int, int>> GetPossibleAnswers()
     {
-        calculationsDone = 0;
         List<int> inputs = new List<int>();
         Dictionary<int, int> answers = new Dictionary<int, int>();
         foreach (Tile gridTile in grid.tiles)
@@ -146,8 +138,6 @@ public class GameRules : ScriptableObject
 
     private void AddPotentialAnswer(Dictionary<int, int> answers, int result)
     {
-        calculationsDone++;
-
         if (answerFilters.HasFlag(AnswerFilter.NoPositive) && result > 0) return;
         if (answerFilters.HasFlag(AnswerFilter.NoNegative) && result < 0) return;
         if (answerFilters.HasFlag(AnswerFilter.NoEven) && result % 2 == 0) return;
@@ -208,6 +198,7 @@ public class GameRules : ScriptableObject
 
     public void NextAnswer()
     {
+        grid.SolvedCount++;
         int lastAnswer = CurrentAnswer;
 
         GenerateAnswer(lastAnswer);

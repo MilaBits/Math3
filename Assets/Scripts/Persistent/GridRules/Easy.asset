@@ -25,7 +25,7 @@ MonoBehaviour:
   - 8
   - 9
   ChangingTileCount: 2
-  CurrentAnswer: 21
+  CurrentAnswer: 11
   answerFilters: 2
   frequencyRange: {x: 1, y: 150}
   NextAnswerEvent:

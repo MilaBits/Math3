@@ -55,6 +55,7 @@ public class TileGrid : MonoBehaviour
 
     private Transform popupTarget;
 
+    public int SolvedCount;
     private void Awake()
     {
         Theme = Resources.LoadAll<Settings>("Settings").First().Theme;
