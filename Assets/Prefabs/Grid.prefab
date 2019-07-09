@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 778657467}
   - component: {fileID: 778657466}
   - component: {fileID: 778657465}
-  m_Layer: 5
+  m_Layer: 8
   m_Name: GoalText
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -297,7 +297,7 @@ GameObject:
   - component: {fileID: 1026291004}
   - component: {fileID: 1026291003}
   - component: {fileID: 1026291002}
-  m_Layer: 5
+  m_Layer: 8
   m_Name: Bonus
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -520,7 +520,7 @@ GameObject:
   - component: {fileID: 1379156394}
   - component: {fileID: 1379156393}
   - component: {fileID: 1379156392}
-  m_Layer: 5
+  m_Layer: 8
   m_Name: TimeText
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1041,9 +1041,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 7162331287876796622}
-        m_MethodName: Switch
-        m_Mode: 5
+      - m_Target: {fileID: 1113202414}
+        m_MethodName: Pause
+        m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -1240,7 +1240,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &7727968087926568954
 RectTransform:
   m_ObjectHideFlags: 0
@@ -1311,7 +1311,7 @@ GameObject:
   - component: {fileID: 7055166567304572469}
   - component: {fileID: 5785575298636587996}
   - component: {fileID: 1632595874619664042}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: UI
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1934,7 +1934,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_RaycastTarget: 0
+  m_RaycastTarget: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []

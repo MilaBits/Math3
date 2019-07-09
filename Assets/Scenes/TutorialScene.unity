@@ -2164,36 +2164,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 5269015047212072545, guid: 02abe833cfe11e74991dd4cdeac98d34,
-        type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
-      value: 
-      objectReference: {fileID: 1969913367}
-    - target: {fileID: 5269015047212072545, guid: 02abe833cfe11e74991dd4cdeac98d34,
-        type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: Pause
-      objectReference: {fileID: 0}
-    - target: {fileID: 5269015047212072545, guid: 02abe833cfe11e74991dd4cdeac98d34,
-        type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 3484657288069812740, guid: 02abe833cfe11e74991dd4cdeac98d34,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7362579895749014882, guid: 02abe833cfe11e74991dd4cdeac98d34,
-        type: 3}
-      propertyPath: m_RaycastTarget
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 4057032773786253879, guid: 02abe833cfe11e74991dd4cdeac98d34,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 1935095796955354, guid: 02abe833cfe11e74991dd4cdeac98d34, type: 3}
       propertyPath: m_Name
       value: Game
@@ -2261,6 +2231,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 0}
     - target: {fileID: 1379156394, guid: 02abe833cfe11e74991dd4cdeac98d34, type: 3}
+      propertyPath: m_Mesh
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 1026291005, guid: 02abe833cfe11e74991dd4cdeac98d34, type: 3}
       propertyPath: m_Mesh
       value: 
       objectReference: {fileID: 0}

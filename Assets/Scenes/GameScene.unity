@@ -1297,10 +1297,6 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1113202414, guid: 02abe833cfe11e74991dd4cdeac98d34, type: 3}
-      propertyPath: TimeOver.m_PersistentCalls.m_Calls.Array.data[0].m_Target
-      value: 
-      objectReference: {fileID: 729715945}
-    - target: {fileID: 1113202414, guid: 02abe833cfe11e74991dd4cdeac98d34, type: 3}
       propertyPath: results
       value: 
       objectReference: {fileID: 729715950}
@@ -1312,47 +1308,9 @@ PrefabInstance:
       propertyPath: m_Mesh
       value: 
       objectReference: {fileID: 0}
-    - target: {fileID: 778657463, guid: 02abe833cfe11e74991dd4cdeac98d34, type: 3}
-      propertyPath: m_Layer
-      value: 8
-      objectReference: {fileID: 0}
-    - target: {fileID: 1026291000, guid: 02abe833cfe11e74991dd4cdeac98d34, type: 3}
-      propertyPath: m_Layer
-      value: 8
-      objectReference: {fileID: 0}
-    - target: {fileID: 1379156390, guid: 02abe833cfe11e74991dd4cdeac98d34, type: 3}
-      propertyPath: m_Layer
-      value: 8
-      objectReference: {fileID: 0}
-    - target: {fileID: 3740198202029830870, guid: 02abe833cfe11e74991dd4cdeac98d34,
-        type: 3}
-      propertyPath: m_Layer
-      value: 8
-      objectReference: {fileID: 0}
-    - target: {fileID: 133561871682301819, guid: 02abe833cfe11e74991dd4cdeac98d34,
-        type: 3}
-      propertyPath: m_fontColor.r
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 133561871682301819, guid: 02abe833cfe11e74991dd4cdeac98d34,
-        type: 3}
-      propertyPath: m_fontColor.g
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 133561871682301819, guid: 02abe833cfe11e74991dd4cdeac98d34,
-        type: 3}
-      propertyPath: m_fontColor.b
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 133561871682301819, guid: 02abe833cfe11e74991dd4cdeac98d34,
-        type: 3}
-      propertyPath: m_fontColor32.rgba
-      value: 16777215
-      objectReference: {fileID: 0}
-    - target: {fileID: 133561871682301819, guid: 02abe833cfe11e74991dd4cdeac98d34,
-        type: 3}
-      propertyPath: m_fontColor.a
-      value: 0
+    - target: {fileID: 1026291005, guid: 02abe833cfe11e74991dd4cdeac98d34, type: 3}
+      propertyPath: m_Mesh
+      value: 
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 02abe833cfe11e74991dd4cdeac98d34, type: 3}

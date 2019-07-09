@@ -66,6 +66,7 @@ public class Timer : MonoBehaviour
 
     protected void Start()
     {
+        pausedBackground.transform.parent.gameObject.SetActive(true);
         timeSpan = TimeSpan.FromMilliseconds(grid.GameRules.ScoreBonusTime);
         grid.GameRules.NextAnswerEvent.AddListener(AddBonusTime);
         SetTimeText(grid.GameRules.GameTime);
