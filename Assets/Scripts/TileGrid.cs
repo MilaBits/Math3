@@ -58,7 +58,7 @@ public class TileGrid : MonoBehaviour
     public int SolvedCount;
     private void Awake()
     {
-        Theme = Resources.LoadAll<Settings>("Settings").First().Theme;
+        Theme = Resources.Load<Theme>($"Themes/{PlayerPrefs.GetString("Theme")}");
     }
 
     void Start()

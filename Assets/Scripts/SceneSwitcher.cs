@@ -8,7 +8,7 @@ public class SceneSwitcher : MonoBehaviour
 {
     public void Switch(string scene)
     {
-        if (scene == "GameScene" && !Resources.LoadAll<Settings>("Settings").First().WatchedTutorial)
+        if (scene == "GameScene" && PlayerPrefs.GetInt("WatchedTutorial") == 0)
         {
             SceneManager.LoadScene("TutorialScene");
             return;

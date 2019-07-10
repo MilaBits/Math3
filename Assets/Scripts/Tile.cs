@@ -45,7 +45,7 @@ public class Tile : MonoBehaviour
 
     public void SetValue(string text)
     {
-        if (!theme) theme = Resources.LoadAll<Settings>("Settings").First().Theme;
+        if (!theme) theme = Resources.Load<Theme>($"Themes/{PlayerPrefs.GetString("Theme")}");
         value = text;
         textMesh.text = value;
 
@@ -67,9 +67,13 @@ public class Tile : MonoBehaviour
         }
     }
 
+    private void Awake()
+    {
+        if (!theme) theme = Resources.Load<Theme>($"Themes/{PlayerPrefs.GetString("Theme")}");
+    }
+
     private void Start()
     {
-        if (!theme) theme = Resources.LoadAll<Settings>("Settings").First().Theme;
         textMesh.color = theme.TileTextColor;
     }
 
@@ -158,6 +162,8 @@ public class Tile : MonoBehaviour
             elapsedTime += Time.deltaTime;
             yield return new WaitForEndOfFrame();
         }
+
+        transform.localScale = new Vector3(end, end, end);
     }
 
     private void CheckAnswer()

@@ -2238,6 +2238,16 @@ PrefabInstance:
       propertyPath: m_Mesh
       value: 
       objectReference: {fileID: 0}
+    - target: {fileID: 4057032773786253879, guid: 02abe833cfe11e74991dd4cdeac98d34,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4057032773786253879, guid: 02abe833cfe11e74991dd4cdeac98d34,
+        type: 3}
+      propertyPath: m_Name
+      value: Pause Canvas
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 02abe833cfe11e74991dd4cdeac98d34, type: 3}
 --- !u!1 &1115110539

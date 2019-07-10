@@ -53,7 +53,7 @@ public class Tutorial : MonoBehaviour
 
     [SerializeField, FoldoutGroup("References")]
     private Canvas pauseCanvas;
-    
+
     private int currentMessage = 0;
 
     private bool locked = true;
@@ -70,8 +70,8 @@ public class Tutorial : MonoBehaviour
 
         text.text = tutorialMessages[0].Text;
         progressText.text = $"1/{tutorialMessages.Count}";
-
-        Resources.LoadAll<Settings>("Settings").First().WatchedTutorial = true;
+        
+        PlayerPrefs.SetInt("WatchedTutorial", 1);
     }
 
     private void Update()
@@ -85,6 +85,8 @@ public class Tutorial : MonoBehaviour
     IEnumerator DelayedStart()
     {
         yield return new WaitForSeconds(0.5f);
+        pauseCanvas.gameObject.SetActive(false);
+
         grid.SetGridValues(gridValues);
 
         grid.GameRules.CurrentAnswer = tutorialGoal;

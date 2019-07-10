@@ -43,6 +43,8 @@ public class Timer : MonoBehaviour
 
     [SerializeField, BoxGroup("Pause")]
     private Image pauseButtonImage;
+    [SerializeField, BoxGroup("Pause")]
+    private Image pauseButtonBackgroundImage;
 
     [SerializeField, BoxGroup("Pause")]
     private Image pausedBackground;
@@ -63,6 +65,8 @@ public class Timer : MonoBehaviour
     [SerializeField, BoxGroup("Pause")]
     private Sprite playSprite;
 
+    [SerializeField, BoxGroup("Pause")]
+    private TextMeshProUGUI pausedText;
 
     protected void Start()
     {
@@ -71,14 +75,19 @@ public class Timer : MonoBehaviour
         grid.GameRules.NextAnswerEvent.AddListener(AddBonusTime);
         SetTimeText(grid.GameRules.GameTime);
 
-        Theme theme = Resources.LoadAll<Settings>("Settings").First().Theme;
+        string themePath = $"Themes/{PlayerPrefs.GetString("Theme")}";
+        Theme theme = Resources.Load<Theme>(themePath);
         pausedBackground.color = theme.TileColor;
+        pausedText.color = theme.TileTextColor;
         
         quitButton.color = theme.ChangeColor;
         quitButtonText.color = theme.TileTextColor;
         
         continueButton.color = theme.SolutionColor;
         continueButtonText.color = theme.TileTextColor;
+
+        pauseButtonImage.color = theme.TextColor;
+        pauseButtonBackgroundImage.color = theme.TextColor;
     }
 
     public void StartTimer()
@@ -141,7 +150,7 @@ public class Timer : MonoBehaviour
     private void SetTimeText(float time)
     {
         TimeSpan t = TimeSpan.FromMilliseconds(time);
-//        timeText.text = new DateTime(t.Ticks).ToString("m:ss");
-        timeText.text = $"{t.Minutes}:{t.Seconds}";
+        timeText.text = new DateTime(t.Ticks).ToString("m:ss");
+//        timeText.text = $"{t.Minutes}:{t.Seconds}";
     }
 }
