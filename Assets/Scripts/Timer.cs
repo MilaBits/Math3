@@ -43,6 +43,7 @@ public class Timer : MonoBehaviour
 
     [SerializeField, BoxGroup("Pause")]
     private Image pauseButtonImage;
+
     [SerializeField, BoxGroup("Pause")]
     private Image pauseButtonBackgroundImage;
 
@@ -54,11 +55,13 @@ public class Timer : MonoBehaviour
 
     [SerializeField, BoxGroup("Pause")]
     private Image quitButton;
+
     [SerializeField, BoxGroup("Pause")]
     private TextMeshProUGUI quitButtonText;
 
     [SerializeField, BoxGroup("Pause")]
     private Image continueButton;
+
     [SerializeField, BoxGroup("Pause")]
     private TextMeshProUGUI continueButtonText;
 
@@ -79,10 +82,10 @@ public class Timer : MonoBehaviour
         Theme theme = Resources.Load<Theme>(themePath);
         pausedBackground.color = theme.TileColor;
         pausedText.color = theme.TileTextColor;
-        
+
         quitButton.color = theme.ChangeColor;
         quitButtonText.color = theme.TileTextColor;
-        
+
         continueButton.color = theme.SolutionColor;
         continueButtonText.color = theme.TileTextColor;
 
@@ -150,7 +153,9 @@ public class Timer : MonoBehaviour
     private void SetTimeText(float time)
     {
         TimeSpan t = TimeSpan.FromMilliseconds(time);
-        timeText.text = new DateTime(t.Ticks).ToString("m:ss");
-//        timeText.text = $"{t.Minutes}:{t.Seconds}";
+        if (t.Ticks > 0)
+        {
+            timeText.text = new DateTime(t.Ticks).ToString("m:ss");
+        }
     }
 }
